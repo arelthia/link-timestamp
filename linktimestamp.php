@@ -18,6 +18,7 @@ function ps_lts_install() {
 		'link_audio'			=> 1,
 		'link_video' 			=> 1,
 		'link_youtube' 			=> 1,
+		'link_vimeo' 			=> 1,
 		'auto_link'		=> 0
 	);
 	update_option('ps_lts_settings', $default_settings);
@@ -144,6 +145,13 @@ function ps_lts_admin_init() {
 		'ps_lts_main'
 	);
 	add_settings_field(
+		'ps_lts_link_vimeo',
+		'Link time for embedded Vimeo videos',
+		'ps_lts_link_vimeo_create',
+		'linktimestamp',
+		'ps_lts_main'
+	);
+	add_settings_field(
 		'ps_lts_auto_link',
 		'Link Timestamps Automatically',
 		'ps_lts_auto_link_create',
@@ -187,6 +195,14 @@ function ps_lts_link_youtube_create() {
 	echo "/>Link Timestamp in embedded Youtube videos.";
 }
 
+function ps_lts_link_vimeo_create() {
+	$options = get_option('ps_lts_settings');
+	$link_vimeo = $options['link_vimeo'];
+	echo "<input name='ps_lts_settings[link_vimeo]' type='checkbox'";
+	if ($link_vimeo) echo ' checked ';
+	echo "/>Link Timestamp in embedded Vimeo videos.";
+}
+
 function ps_lts_auto_link_create() {
 	$options = get_option('ps_lts_settings');
 	$auto_link = $options['auto_link'];
@@ -202,6 +218,7 @@ function ps_lts_validate_settings($input) {
 		'link_audio'		 	=> isset($input['link_audio']) && true == $input['link_audio'] ? true : false,
 		'link_video' 			=> isset($input['link_video']) && true == $input['link_video'] ? true : false,
 		'link_youtube' 			=> isset($input['link_youtube']) && true == $input['link_youtube'] ? true : false,
+		'link_vimeo' 			=> isset($input['link_vimeo']) && true == $input['link_vimeo'] ? true : false,
 		'auto_link' 		=> isset($input['auto_link']) && true == $input['auto_link'] ? true : false
 	);
 
@@ -271,6 +288,7 @@ function ps_lts_loaded() {
 add_action('wp_enqueue_scripts', 'ps_lts_enqueue_scripts');
 function ps_lts_enqueue_scripts() {
 	wp_enqueue_style( 'thickbox');
+	wp_enqueue_script('ps-lts-vimeo', 'https://player.vimeo.com/api/player.js');
 	wp_enqueue_script('ps-lts-youtube', 'https://www.youtube.com/iframe_api');
 	wp_enqueue_script('ps-lts-js', plugin_dir_url(__FILE__).'/js/linktimestamp.js');
 	// Expose our settings to our Javascript

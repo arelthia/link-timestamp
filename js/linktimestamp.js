@@ -14,6 +14,10 @@ var lts = {
 	doYoutubelts: function() {
 		lts.media.seekTo(lts.linkTo);
 		lts.media.playVideo();
+	},
+
+	doVimeolts: function() {
+		lts.media.setCurrentTime(lts.linkTo);
 	}
 
 };
@@ -49,11 +53,13 @@ LinkTS = function(time) {
 		lts.media.load();
 		lts.media.play();
 		return;
-	} else if (parseInt(lts.settings.link_youtube && iframe.length)) {
-		// Inspect the iframes, looking for a src with youtube in the URI
+	} 
+
+	if (parseInt(lts.settings.link_youtube && iframe.length)) {
+		
 		for (var i = 0; i < iframe.length; i++) {
 			if (iframe[i].src.search('youtube') !== -1) {
-				// Set up the JS interface
+				
 				lts.doSkip = lts.doYoutubelts;
 
 				iframe[0].id = 'lts-youtube-player';
@@ -67,6 +73,19 @@ LinkTS = function(time) {
 		}
 	}
 
-	//console.log('No media player found!');
+	if (parseInt(lts.settings.link_vimeo && iframe.length)) {
+		for (var i = 0; i < iframe.length; i++) {
+			if (iframe[i].src.search('vimeo') !== -1) {
+				lts.doSkip = lts.doVimeolts;
+				iframe[0].id = 'lts-vimeo-player';
+				lts.media = new Vimeo.Player('lts-vimeo-player');
+				lts.media.on('play', lts.doVimeolts );
+				lts.media.play();
+				return;
+			}
+		}
+	}
+
+	console.log('No audio or video found on page');
 	return;
 }
