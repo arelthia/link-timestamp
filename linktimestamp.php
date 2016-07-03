@@ -160,7 +160,9 @@ function ps_lts_admin_init() {
 	);
 }
 
-function ps_lts_settings_text() {}
+function ps_lts_settings_text() {
+
+}
 
 function ps_lts_only_link_single_select_create() {
 	$options = get_option('ps_lts_settings');
@@ -356,4 +358,3 @@ function ps_lts_register_mce_button( $buttons ) {
 
 
 
-?>
