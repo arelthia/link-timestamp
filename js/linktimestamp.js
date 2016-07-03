@@ -22,6 +22,7 @@ var lts = {
 
 };
 
+
 LinkTS = function(time) {
 	var audio 		= document.getElementsByTagName('audio'),
 		video 		= document.getElementsByTagName('video'),
@@ -89,3 +90,12 @@ LinkTS = function(time) {
 	console.log('No audio or video found on page');
 	return;
 }
+
+jQuery(document).ready( function($) {
+	$('body').on('click','.ps_lts_tslink', function(){
+		timeclicked = $(this).data("time");
+		console.log(timeclicked);
+		LinkTS(timeclicked);
+	});
+	
+});

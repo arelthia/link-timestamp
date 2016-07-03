@@ -59,7 +59,7 @@ function ps_lts_shortcode($attr, $content) {
 	if ($time == -1) {
 		return $content;
 	} else {
-		return '<a href="javascript:void(0)" class="ps_lts_tslink" onclick="LinkTS(\'' . $time . '\')">' . $content . '</a>';
+		return '<a class="ps_lts_tslink"  data-time=' . $time .'>' . $content . '</a>';
 	}
 }
 
@@ -161,7 +161,7 @@ function ps_lts_admin_init() {
 }
 
 function ps_lts_settings_text() {
- 
+
 }
 
 function ps_lts_only_link_single_select_create() {
@@ -293,6 +293,7 @@ function ps_lts_enqueue_scripts() {
 	wp_enqueue_script('ps-lts-vimeo', 'https://player.vimeo.com/api/player.js');
 	wp_enqueue_script('ps-lts-youtube', 'https://www.youtube.com/iframe_api');
 	wp_enqueue_script('ps-lts-js', plugin_dir_url(__FILE__).'/js/linktimestamp.js');
+	wp_enqueue_script('jquery');
 	// Expose our settings to our Javascript
 	wp_localize_script('ps-lts-js', 'ltsettings', get_option('ps_lts_settings'));
 }
@@ -319,7 +320,7 @@ function ps_lts_hyperlink_timestamps($content) {
 
 	$content = preg_replace(
 		"/(?:(?:(?<hh>\d{1,2})[:])?(?<mm>\d{1,2})[:])(?<ss>\d{1,2})/",
-		'<a href="javascript:void(0)" class="ps_lts_tslink" onclick="LinkTS(\'$0\')">$0</a>',
+		'<a class="ps_lts_tslink" data-time=$0>$0</a>',
 		$content
 	);
 

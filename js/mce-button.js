@@ -23,7 +23,7 @@
            		],
 				onsubmit: function( e ) {
 					editor.insertContent( '[linktimestamp time=' + e.data.timestamp + ']' + e.data.timetext + '[/linktimestamp]');
-					//editor.insertContent('<a href="javascript:void(0)" class="ps_lts_tslink" onclick="LinkTS(' + e.data.timestamp + ')">' + e.data.timetext + '</a>');
+					//editor.insertContent('<a class="ps_lts_tslink" data-time="' + e.data.timestamp + '">' + e.data.timetext + '</a>')
 				}
            	});	//end editor.windowManager.open
     
