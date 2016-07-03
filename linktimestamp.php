@@ -161,7 +161,7 @@ function ps_lts_admin_init() {
 }
 
 function ps_lts_settings_text() {
-
+ 
 }
 
 function ps_lts_only_link_single_select_create() {
@@ -318,7 +318,7 @@ function ps_lts_hyperlink_timestamps($content) {
 	}
 
 	$content = preg_replace(
-		"/(?:(?:(?<hh>\d{1,2})[:.])?(?<mm>\d{1,2})[:.])(?<ss>\d{1,2})/",
+		"/(?:(?:(?<hh>\d{1,2})[:])?(?<mm>\d{1,2})[:])(?<ss>\d{1,2})/",
 		'<a href="javascript:void(0)" class="ps_lts_tslink" onclick="LinkTS(\'$0\')">$0</a>',
 		$content
 	);
