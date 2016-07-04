@@ -118,10 +118,12 @@ class Link_Timestamp_Admin {
 	public function register_lts_options(){
 
 		register_setting(
-			'ps_lts_settings',
+			'ps_lts_settings_group',
 			'ps_lts_settings',
 			array($this,'validate_lts_settings')
 		);
+
+
 
 		add_settings_section(
 			'ps_lts_link_section',
@@ -138,13 +140,7 @@ class Link_Timestamp_Admin {
 			'ps_lts_link_section'
 		);
 
-        add_settings_field(
-            'link_on',
-            __('Post types to auto link timestamps on', 'link-timestamp'),
-            array($this, 'render_link_on_field'),
-            'linktimestamp',
-            'ps_lts_link_section'
-        );
+
 
 		add_settings_field(
 			'link_audio',
@@ -178,13 +174,33 @@ class Link_Timestamp_Admin {
 			'ps_lts_link_section'
 		);
 
+		register_setting(
+			'ps_lts_settings_group',
+			'ps_lts_link_on',
+			array($this,'validate_link_on_settings')
+		);
 
+		add_settings_field(
+			'ps_lts_link_on',
+			__('Post types to auto link timestamps on (Single only)', 'link-timestamp'),
+			array($this, 'render_link_on_field'),
+			'linktimestamp',
+			'ps_lts_link_section'
+		);
+	}
 
+	public function validate_link_on_settings($input){
+        $post_types = get_post_types();
+        $valid = array();
+        foreach( $post_types as $type) {
+           $valid[$type] = isset($input[$type]) && true == $input[$type] ? true : false;
+        }
+
+		return $valid;
 	}
 
 	public function validate_lts_settings($input){
 		$valid = array(
-			'link_on' 	=> isset($input['link_on']) && true == $input['link_on'] ? true : false,
 			'link_audio'		 	=> isset($input['link_audio']) && true == $input['link_audio'] ? true : false,
 			'link_video' 			=> isset($input['link_video']) && true == $input['link_video'] ? true : false,
 			'link_youtube' 			=> isset($input['link_youtube']) && true == $input['link_youtube'] ? true : false,
@@ -208,17 +224,17 @@ class Link_Timestamp_Admin {
 
     public function render_link_on_field(){
         $post_types = get_post_types();
-        $options = (array)get_option('ps_lts_settings');
+        $options = (array)get_option('ps_lts_link_on');
 
-        var_dump($options);
+
 
         foreach ( $post_types as $type ) {
-            if( !isset($options['link_on'][$type]) ){
-                $options['link_on'][$type] = 0;
+            if( !isset($options[$type]) ){
+                $options[$type] = 0;
             }
-            echo '<label><input name="ps_lts_settings[link_on]['.$type.']" id="ps_lts_settings[link_on]['.$type.']" type="checkbox" value="1" class="code" ' . checked( 1, $options['link_on'][$type], false ) . ' />'. $type .'</label><br />' ;
+			echo '<label><input name="ps_lts_link_on['. $type .']" id="ps_lts_link_on['. $type .']" type="checkbox" value="1" class="code" ' . checked( 1, $options[$type], false ) . ' />'. $type .'</label><br />' ;
 
-        }
+		}
     }
 
 	public function render_audio_field(){

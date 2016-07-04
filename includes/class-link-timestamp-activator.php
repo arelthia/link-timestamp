@@ -30,8 +30,8 @@ class Link_Timestamp_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
+		$default_link_on_type 	= array('post' => 1, 'page' => 1);
 		$default_settings = array(
-			'link_on' 		=> array('post' => 1, 'page' => 1),
 			'link_audio'			=> 1,
 			'link_video' 			=> 1,
 			'link_youtube' 			=> 1,
@@ -39,6 +39,7 @@ class Link_Timestamp_Activator {
 			'auto_link'		=> 0
 		);
 		update_option('ps_lts_settings', $default_settings);
+		update_option('ps_lts_link_on', $default_link_on_type);
 	}
 
 }

@@ -63,7 +63,7 @@
                             <h2 class="hndle"><?php _e( 'Settings', 'link-timestamp' ); ?></h2>
                             <form action="options.php" method="post">
 
-                                <?php settings_fields('ps_lts_settings'); ?>
+                                <?php settings_fields('ps_lts_settings_group'); ?>
                                 <?php do_settings_sections('linktimestamp'); ?>
 
 

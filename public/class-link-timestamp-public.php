@@ -120,15 +120,20 @@ class Link_Timestamp_Public {
      * @return mixed
      */
     public function do_autolink($content) {
-		// Don't autolink if it's turned off.
+		$type = get_post_type( get_the_ID() );
 		$options = get_option('ps_lts_settings');
+		$link_on_option = get_option('ps_lts_link_on');
+
+		// Don't autolink if it's turned off.
+
 		if (!$options['auto_link']) {
 			return $content;
 		}
-		// Don't autolink if singular page and only linking on singular pages is turned on.
-		if (!is_singular() && $options['link_on']) {
+		// Don't autolink if post type is not enabled or n
+		if (!$link_on_option[$type] || !is_singular()) {
 			return $content;
 		}
+
 		// Don't autolink if they've turned off autolinking for this page.
 		if (get_post_meta(get_the_ID(), 'ps-lts-disable-auto-link', true)) {
 			return $content;
