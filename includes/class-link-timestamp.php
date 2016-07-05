@@ -115,6 +115,12 @@ class Link_Timestamp {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-link-timestamp-mce-button.php';
 
 		/**
+		 * The class responsible for defining metaboxes and functionality
+		 *
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-link-timestamp-metabox.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-link-timestamp-admin.php';
@@ -157,12 +163,15 @@ class Link_Timestamp {
 
 		$plugin_admin = new Link_Timestamp_Admin( $this->get_plugin_name(), $this->get_version() );
 		$plugin_mce_buttons = new link_timestamp_mce_button();
+		$plugin_metaboxes = new link_timestamp_metabox();
 		//$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action('admin_menu', $plugin_admin, 'add_lts_menu' );
 		$this->loader->add_action('admin_init', $plugin_admin, 'register_lts_options' );
 		$this->loader->add_action( 'admin_head', $plugin_mce_buttons, 'ps_lts_add_mce_button' );
-
+		$this->loader->add_action( 'add_meta_boxes', $plugin_metaboxes, 'ps_lts_add_metabox');
+		$this->loader->add_action( 'save_post', $plugin_metaboxes, 'ps_lts_save_metabox');
+		$this->loader->add_action( 'wp_ajax_ps_lts_ajax_get_page_settings', $plugin_metaboxes, 'ps_lts_get_page_settings');
 	}
 
 	/**
