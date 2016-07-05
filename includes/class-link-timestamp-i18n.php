@@ -22,7 +22,7 @@
  * @since      1.0.0
  * @package    Link_Timestamp
  * @subpackage Link_Timestamp/includes
- * @author     Arelthia Phillips <Arelthia Phillips@gmail.com>
+ * @author     Arelthia Phillips <arelthia@pintopsolutions.com>
  */
 class Link_Timestamp_i18n {
 

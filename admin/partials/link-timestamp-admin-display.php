@@ -21,7 +21,7 @@
 <div class=""wrap">
     <h2>Link Timestamp</h2>
     <hr/>
-    <?php do_action( 'lts_settings_top' ); ?>
+    <?php do_action( 'ps_lts_settings_top' ); ?>
     <div id="bctt_admin" class="metabox-holder has-right-sidebar">
         <div class="inner-sidebar">
             <div id="normal-sortables" class="meta-box-sortables ui-sortable">
@@ -53,7 +53,8 @@
                     <div class="postbox">
                         <div class="inside">
                             <h2 class="hndle"><?php _e( 'Instructions', 'link-timestamp' ); ?></h2>
-                            <p><?php  _e( 'Use Instructions', 'link-timestamp' ); ?></p>
+                            <p><?php  _e( 'Link Timestamp can be configured to automatically link timestamps by setting the options below. ', 'link-timestamp' ); ?></p>
+                            <p><?php  _e( 'Or manually add links to your timestamps using the button in the visual editor', 'link-timestamp' ); ?></p>
 
 
                         </div>
@@ -67,7 +68,21 @@
                                 <?php do_settings_sections('linktimestamp'); ?>
 
 
-                                <input name="Submit" type="submit" value="Save Changes" />
+                                <input class="button button-primary" name="Submit" type="submit" value="Save Changes" />
+                            </form>
+
+                        </div>
+                    </div>
+                    <div class="postbox">
+                        <div class="inside">
+                            <h2 class="hndle"><?php _e( 'Misc Settings', 'link-timestamp' ); ?></h2>
+                            <form action="options.php" method="post">
+
+                                <?php settings_fields('ps_lts_misc_group'); ?>
+                                <?php do_settings_sections('linktimestamp_misc'); ?>
+
+
+                                <input class="button button-primary" name="Submit" type="submit" value="Save Changes" />
                             </form>
 
                         </div>

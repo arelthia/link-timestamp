@@ -18,7 +18,7 @@
  *
  * @package    Link_Timestamp
  * @subpackage Link_Timestamp/admin
- * @author     Arelthia Phillips <Arelthia Phillips@gmail.com>
+ * @author     Arelthia Phillips <arelthia@pintopsolutions.com>
  */
 class Link_Timestamp_Admin {
 
@@ -187,6 +187,36 @@ class Link_Timestamp_Admin {
 			'linktimestamp',
 			'ps_lts_link_section'
 		);
+
+
+		add_settings_section(
+			'ps_lts_misc_section',
+			__('', 'link-timestamp'),
+			array($this, 'render_misc_section'),
+			'linktimestamp_misc'
+		);
+
+		add_settings_field(
+			'clean_on_delete',
+			__('Remove Data on Uninstall?', 'link-timestamp'),
+			array($this, 'render_pt_lts_clean_on_delete_field'),
+			'linktimestamp_misc',
+			'ps_lts_misc_section'
+		);
+
+		register_setting(
+			'ps_lts_misc_group',
+			'pt_lts_misc_settings',
+			array($this,'validate_misc_group_settings')
+		);
+
+	}
+
+	public function validate_misc_group_settings($input){
+		$valid = array(
+			'clean_on_delete'	=> isset($input['clean_on_delete']) && true == $input['clean_on_delete'] ? true : false,
+
+		);
 	}
 
 	public function validate_link_on_settings($input){
@@ -206,6 +236,7 @@ class Link_Timestamp_Admin {
 			'link_youtube' 			=> isset($input['link_youtube']) && true == $input['link_youtube'] ? true : false,
 			'link_vimeo' 			=> isset($input['link_vimeo']) && true == $input['link_vimeo'] ? true : false,
 			'auto_link' 		=> isset($input['auto_link']) && true == $input['auto_link'] ? true : false
+			/*'pt_lts_clean_on_delete' => isset($input['pt_lts_clean_on_delete']) && true == $input['pt_lts_clean_on_delete'] ? true : false*/
 		);
 
 		return $valid;
@@ -279,8 +310,20 @@ class Link_Timestamp_Admin {
 	}
 
 
+	public function render_pt_lts_clean_on_delete_field(){
+		$options = get_option('pt_lts_misc_settings');
+		$clean = isset($options['clean_on_delete']) && true == $options['clean_on_delete'] ? 1 : 0;
+		echo "<input name='pt_lts_misc_settings[clean_on_delete]' type='checkbox'";
+		if ($clean) echo ' checked ';
+		echo "/>";
+		echo '<label class="description">' . __('Check this box if you would like Link Timestamp to completely remove all of its data when the plugin is deleted. This includes removing the shortcode from posts.', 'link-timestamp' ) . '</label>';
+	}
+
     public function render_link_section(){
 
     }
 
+public function render_misc_section(){
+
+	}
 }

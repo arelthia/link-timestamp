@@ -21,47 +21,27 @@ ini_set('error_log', dirname(__FILE__).'/errors.log');
  * Domain Path:       /languages
  */
 
-// If this file is called directly, abort.
+
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 define('LINK_TIMESTAMP_NAME', 'link-timestamp');
 define('LINK_TIMESTAMP_VERSION', '1.0');
-/**
- * The code that runs during plugin activation.
- * This action is documented in includes/class-link-timestamp-activator.php
- */
+
+
 function activate_link_timestamp() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-link-timestamp-activator.php';
 	Link_Timestamp_Activator::activate();
 }
 register_activation_hook( __FILE__, 'activate_link_timestamp' );
 
-/**
- * TODO Delete this and file
- * The code that runs during plugin deactivation.
- * This action is documented in includes/class-link-timestamp-deactivator.php
- */
-function deactivate_link_timestamp() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-link-timestamp-deactivator.php';
-	Link_Timestamp_Deactivator::deactivate();
-}
-register_deactivation_hook( __FILE__, 'deactivate_link_timestamp' );
 
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
 require plugin_dir_path( __FILE__ ) . 'includes/class-link-timestamp.php';
 
 /**
  * Begins execution of the plugin.
  *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    1.0.0
+ * @since    1.0
  */
 function run_link_timestamp() {
 

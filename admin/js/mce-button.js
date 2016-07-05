@@ -12,9 +12,10 @@
            				type: 'textbox',
 						name: 'timestamp',
 						label: 'Time',
-						value: '00:00:00'
+						value: '00:00',
+						tooltip: 'Enter time as hh:mm:ss for example 01:10:25 or mm:ss for example 00:45.'
            			},
-           			{
+					{
            				type: 'textbox',
 						name: 'timetext',
 						label: 'Text to link',
