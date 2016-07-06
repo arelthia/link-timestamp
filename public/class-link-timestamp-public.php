@@ -1,20 +1,7 @@
 <?php
-
 /**
  * The public-facing functionality of the plugin.
  *
- * @link       https://pintopsolutions.com
- * @since      1.0
- *
- * @package    Link_Timestamp
- * @subpackage Link_Timestamp/public
- */
-
-/**
- * The public-facing functionality of the plugin.
- *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
  *
  * @package    Link_Timestamp
  * @subpackage Link_Timestamp/public
@@ -55,30 +42,9 @@ class Link_Timestamp_Public {
 
     }
 
-	/**
-	 * Register the stylesheets for the public-facing side of the site.
-	 *
-	 * @since    1.0
-	 */
-	public function enqueue_styles() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Link_Timestamp_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Link_Timestamp_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/link-timestamp-public.css', array(), $this->version, 'all' );
-
-	}
 
 	/**
+     * enqueue_scripts
 	 * Register the JavaScript for the public-facing side of the site.
 	 *
 	 * @since    1.0
@@ -93,6 +59,14 @@ class Link_Timestamp_Public {
 		wp_localize_script($this->plugin_name, 'ltsettings', get_option('ps_lts_settings'));
 	}
 
+	/**
+     * do_lts_shortcode
+     *
+	 * @param $attr
+	 * @param $content
+	 * @return $content
+	 *
+	 */
     public function do_lts_shortcode($attr, $content) {
         $options = get_option('ps_lts_settings');
         // Only link singular posts if the option is set
@@ -110,12 +84,16 @@ class Link_Timestamp_Public {
         if ($time == -1) {
             return $content;
         } else {
-            return '<a class="ps_lts_tslink"  data-time=' . $time .'>' . $content . '</a>';
+            $output =  '<a class="ps_lts_tslink"  data-time=' . $time .'>' . $content . '</a>';
+			return apply_filters( 'ps_lts_shortcode_result', $output );
+
         }
     }
 
     /**
      * ps_lts_hyperlink_timestamps
+     * Filters the content to replace timestamps with linked timestamps
+     *
      * @param $content
      * @return mixed
      */
@@ -144,15 +122,28 @@ class Link_Timestamp_Public {
 			return $content;
 		}
 
+		$element = '<a class="ps_lts_tslink" data-time=$0>$0</a>';
+
+		$element = apply_filters( 'ps_lts_auto_link_result', $element );
+
 		$content = preg_replace(
 			"/(?:(?:(?<hh>\d{1,2})[:])?(?<mm>\d{1,2})[:])(?<ss>\d{1,2})/",
-			'<a class="ps_lts_tslink" data-time=$0>$0</a>',
+			$element,
 			$content
 		);
 
 		return $content;
 	}
 
+    /**
+     * enable_youtube_js_api
+     *
+     * When a video is added using the oembed [embed] short code
+     * enable the youtube api
+     *
+     * @param $html
+     * @return mixed
+     */
     public function enable_youtube_js_api($html) {
         if (strstr($html, 'youtube.com/embed/')) {
             $html = str_replace('?feature=oembed', '?feature=oembed&enablejsapi=1', $html);
@@ -164,6 +155,7 @@ class Link_Timestamp_Public {
 
     /**
      * post_has_shortcode
+     * Checks to see if the post is using the [linktimestamp] shortcode
      * @return bool
      */
     private function post_has_shortcode() {
@@ -175,6 +167,10 @@ class Link_Timestamp_Public {
         }
     }
 
+    /**
+     * get_lts_settings
+     * @return mixed|void
+     */
     private function get_lts_settings() {
         return get_option('ps_lts_settings');
     }

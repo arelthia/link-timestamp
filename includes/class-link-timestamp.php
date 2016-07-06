@@ -1,18 +1,4 @@
 <?php
-
-/**
- * The file that defines the core plugin class
- *
- * A class definition that includes attributes and functions used across both the
- * public-facing side of the site and the admin area.
- *
- * @link       https://pintopsolutions.com
- * @since      1.0
- *
- * @package    Link_Timestamp
- * @subpackage Link_Timestamp/includes
- */
-
 /**
  * The core plugin class.
  *
@@ -164,8 +150,6 @@ class Link_Timestamp {
 		$plugin_admin = new Link_Timestamp_Admin( $this->get_plugin_name(), $this->get_version() );
 		$plugin_mce_buttons = new link_timestamp_mce_button();
 		$plugin_metaboxes = new link_timestamp_metabox();
-		//$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action('admin_menu', $plugin_admin, 'add_lts_menu' );
 		$this->loader->add_action('admin_init', $plugin_admin, 'register_lts_options' );
 		$this->loader->add_action( 'admin_head', $plugin_mce_buttons, 'ps_lts_add_mce_button' );
@@ -185,7 +169,6 @@ class Link_Timestamp {
 
 		$plugin_public = new Link_Timestamp_Public( $this->get_plugin_name(), $this->get_version() );
 
-		//$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_filter( 'embed_oembed_html', $plugin_public, 'enable_youtube_js_api');
 		$this->loader->add_filter( 'the_content', $plugin_public, 'do_autolink' );

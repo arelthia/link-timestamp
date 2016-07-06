@@ -89,9 +89,10 @@ var LinkTS = function(time) {
 
 	console.log('No audio or video found on page');
 	return;
-}
+};
 
 jQuery(document).ready( function($) {
+    $('.ps_lts_tslink').css('cursor', 'pointer');
 	$('body').on('click','.ps_lts_tslink', function(){
 		timeclicked = $(this).data("time");
 		LinkTS(timeclicked);

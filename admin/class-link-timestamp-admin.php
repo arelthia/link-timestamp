@@ -1,15 +1,4 @@
 <?php
-
-/**
- * The admin-specific functionality of the plugin.
- *
- * @link       https://pintopsolutions.com
- * @since      1.0.0
- *
- * @package    Link_Timestamp
- * @subpackage Link_Timestamp/admin
- */
-
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -25,7 +14,7 @@ class Link_Timestamp_Admin {
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
@@ -34,7 +23,7 @@ class Link_Timestamp_Admin {
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
@@ -43,7 +32,7 @@ class Link_Timestamp_Admin {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
@@ -54,51 +43,6 @@ class Link_Timestamp_Admin {
 
 	}
 
-	/**
-	 * Register the stylesheets for the admin area.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_styles() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Link_Timestamp_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Link_Timestamp_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/link-timestamp-admin.css', array(), $this->version, 'all' );
-
-	}
-
-	/**
-	 * Register the JavaScript for the admin area.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Link_Timestamp_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Link_Timestamp_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/link-timestamp-admin.js', array( 'jquery' ), $this->version, false );
-
-	}
 
 
 	public function add_lts_menu(){
@@ -248,9 +192,7 @@ class Link_Timestamp_Admin {
         echo "<input name='ps_lts_settings[auto_link]' type='checkbox'";
         if ($auto_link) echo ' checked ';
         echo "/>";
-       echo '<p class="description">' . __('You can manually link timestamps in the editor. If you check this all text 
-        formatted <br />like \'1:15\' or \'00:45\' in your posts will be automatically replaced with a link to the correct 
-        timestamp.', 'link-timestamp' ) . '</p>';
+       
 	}
 
     public function render_link_on_field(){
@@ -274,8 +216,8 @@ class Link_Timestamp_Admin {
         echo "<input name='ps_lts_settings[link_audio]' type='checkbox'";
         if ($link_audio) echo ' checked ';
         echo "/>";
-        echo '<p class="description">' . __('Link Timestamp in audio embedded with the [audio] 
-        shortcode or &lt;audio&gt; HTML5 tag.', 'link-timestamp' ) . '</p>';
+        echo '<label class="description">' . __('Link Timestamp in audio embedded with the [audio] 
+        shortcode or &lt;audio&gt; HTML5 tag.', 'link-timestamp' ) . '</label>';
 
 	}
 
@@ -286,8 +228,8 @@ class Link_Timestamp_Admin {
         echo "<input name='ps_lts_settings[link_video]' type='checkbox'";
         if ($link_video) echo ' checked ';
         echo "/>";
-        echo '<p class="description">' . __('Link Timestamp in audio embedded with the [video] 
-        shortcode or &lt;video&gt; HTML5 tag.', 'link-timestamp' ) . '</p>';
+        echo '<label class="description">' . __('Link Timestamp in audio embedded with the [video] 
+        shortcode or &lt;video&gt; HTML5 tag.', 'link-timestamp' ) . '</label>';
 	}
 
 	public function render_youtube_field(){
@@ -296,7 +238,7 @@ class Link_Timestamp_Admin {
         echo "<input name='ps_lts_settings[link_youtube]' type='checkbox'";
         if ($link_youtube) echo ' checked ';
         echo "/>";
-        echo '<p class="description">' . __('Link Timestamp in embedded Youtube videos.', 'link-timestamp' ) . '</p>';
+        echo '<label class="description">' . __('Link Timestamp in embedded Youtube videos.', 'link-timestamp' ) . '</label>';
 
 	}
 
@@ -306,7 +248,7 @@ class Link_Timestamp_Admin {
         echo "<input name='ps_lts_settings[link_vimeo]' type='checkbox'";
         if ($link_vimeo) echo ' checked ';
         echo "/>";
-        echo '<p class="description">' . __('Link Timestamp in embedded Vimeo videos.', 'link-timestamp' ) . '</p>';
+        echo '<label class="description">' . __('Link Timestamp in embedded Vimeo videos.', 'link-timestamp' ) . '</label>';
 	}
 
 

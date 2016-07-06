@@ -11,7 +11,7 @@ ini_set('error_log', dirname(__FILE__).'/errors.log');
  * @wordpress-plugin
  * Plugin Name:       Link Timestamp
  * Plugin URI:        https://pintopsolutions.com
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Add a link to timestamps on your website. When the link is clicked the audio or video will jump to the correct time in the media player.
  * Version:           1.0
  * Author:            Arelthia Phillips
  * Author URI:        https://pintopsolutions.com
@@ -50,3 +50,8 @@ function run_link_timestamp() {
 
 }
 run_link_timestamp();
+
+
+
+
+

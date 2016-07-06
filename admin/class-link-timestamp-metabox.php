@@ -1,11 +1,26 @@
 <?php
-
+/**
+ * Class link_timestamp_metabox
+ * Add Metabox to the WordPress Admin for enabled post types
+ *
+ *
+ * @link       https://pintopsolutions.com
+ * @since      1.0
+ *
+ * @package    Link_Timestamp
+ * @subpackage Link_Timestamp/includes
+ */
 
 class link_timestamp_metabox
 {
+
     /**
-     * Register the metabox
+     * ps_lts_add_metabox
      *
+     * Register the metabox for post types that are enabled
+     *
+     * @since    1.0
+     * @param $post_type
      */
     public function ps_lts_add_metabox($post_type) {
         $post_types = get_post_types();
@@ -33,6 +48,11 @@ class link_timestamp_metabox
         }
     }
 
+    /**
+     * ps_lts_create_metabox
+     * @since    1.0
+     * @param $post
+     */
    public function ps_lts_create_metabox($post) {
         wp_nonce_field('ps_lts_post_mb', 'ps_lts_post_mb_nonce');
 
@@ -50,8 +70,15 @@ class link_timestamp_metabox
         <?php
     }
 
+    /**
+     * ps_lts_save_metabox
+     * @since    1.0
+     *
+     * @param $post_id
+     * @return mixed
+     */
     public function ps_lts_save_metabox($post_id) {
-        // Verify the nonce to ensure we're getting called from the right spot.
+
         if (!isset($_POST['ps_lts_post_mb_nonce'])) {
             return $post_id;
         }

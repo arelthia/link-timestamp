@@ -1,15 +1,4 @@
 <?php
-
-/**
- * Register all actions and filters for the plugin
- *
- * @link       https://pintopsolutions.com
- * @since      1.0
- *
- * @package    Link_Timestamp
- * @subpackage Link_Timestamp/includes
- */
-
 /**
  * Register all actions and filters for the plugin.
  *

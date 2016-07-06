@@ -14,8 +14,9 @@
 class link_timestamp_mce_button
 {
     /**
-     * Hooks your functions into the correct filters
-     * called from define_admin_hooks() in class-link-timestamp.php
+     * ps_lts_add_mce_button
+     *
+     * @since    1.0
      */
     public function ps_lts_add_mce_button(){
         // check user permissions
@@ -32,6 +33,7 @@ class link_timestamp_mce_button
 
     /**
      * Declare script for new button
+     * @since    1.0
      * @param $plugin_array
      * @return mixed
      */
@@ -43,11 +45,12 @@ class link_timestamp_mce_button
 
     /**
      * Register new button in the editor
+     * @since    1.0
      * @param $buttons
      * @return mixed
      */
     public function ps_lts_register_mce_button( $buttons ) {
-        //array_push( $buttons, 'lts_mce_button' );
+       
         $buttons[]= 'lts_mce_button';
         return $buttons;
     }

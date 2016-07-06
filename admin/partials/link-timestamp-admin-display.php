@@ -1,21 +1,16 @@
 <?php
 
 /**
- * Provide a admin area view for the plugin
+ * Admin settings page
  *
- * This file is used to markup the admin-facing aspects of the plugin.
  *
  * @link       https://pintopsolutions.com
- * @since      1.0.0
+ * @since      1.0
  *
  * @package    Link_Timestamp
  * @subpackage Link_Timestamp/admin/partials
  */
 ?>
-
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->
-
-
 
 
 <div class=""wrap">
@@ -24,23 +19,16 @@
     <?php do_action( 'ps_lts_settings_top' ); ?>
     <div id="bctt_admin" class="metabox-holder has-right-sidebar">
         <div class="inner-sidebar">
-            <div id="normal-sortables" class="meta-box-sortables ui-sortable">
-                <div class="postbox">
-                    <div class="inside">
-                        <h3 class="hndle ui-sortable-handle"><?php _e( 'About the Author', 'link-timestamp' ); ?> </h3>
-                        inside body
-                    </div>
-                </div>
-            </div>
+
             <div class="meta-box-sortables">
                 <div class="postbox">
                     <div class="inside">
-                        <p><?php $url2 = 'https://#';
-                            $link2     = sprintf( __( 'Are you a developer? I would love your help making this plugin better. Check out the <a href=%s>plugin on Github.</a>', 'link-timestamp' ), esc_url( $url2 ) );
+                        <p><?php $url2 = 'https://https://pintopsolutions.com/contact/';
+                            $link2     = sprintf( __( 'Need help? Or have an idea how this plugin can be made better. Reach out <a href=%s>on our website?</a>', 'link-timestamp' ), esc_url( $url2 ) );
                             echo $link2; ?></p>
 
                         <p><?php $url4 = 'https://#';
-                            $link4        = sprintf( __( 'The second best way is to <a href=%s>leave an honest review.</a>', 'link-timestamp' ), esc_url( $url4 ) );
+                            $link4        = sprintf( __( 'We invite you to <a href=%s>leave an honest review.</a>', 'link-timestamp' ), esc_url( $url4 ) );
                             echo $link4; ?></p>
 
                     </div>
@@ -53,9 +41,28 @@
                     <div class="postbox">
                         <div class="inside">
                             <h2 class="hndle"><?php _e( 'Instructions', 'link-timestamp' ); ?></h2>
-                            <p><?php  _e( 'Link Timestamp can be configured to automatically link timestamps by setting the options below. ', 'link-timestamp' ); ?></p>
-                            <p><?php  _e( 'Or manually add links to your timestamps using the button in the visual editor', 'link-timestamp' ); ?></p>
-
+                            <h3>Automatically link timestamps</h3>
+                           <ul>
+                               <li>&#8226;	<?php _e( 'Link Timestamp can be configured to automatically link timestamps.', 'link-timestamp' ); ?></li>
+                               <li>&#8226;	<?php _e( 'By checking LInk Timestamps automatically timestamps formatted like \'1:15:25\' or \'1:15\' or \'00:45\' in your posts will be automatically replaced with a link to the correct 
+        timestamp.', 'link-timestamp' ); ?></li>
+                               <li>&#8226;	<?php _e( 'Control which post type gets automatically linked from the settings page. (Settings > Link Timestamp)', 'link-timestamp' ); ?></li>
+                               <li>&#8226;	<?php _e( 'Control if timestamps are linked to audio or video. (Settings > Link Timestamp) This comes in handy if you have audio and video on the same page.
+', 'link-timestamp' ); ?></li>
+                               <li>&#8226;	<?php _e( 'Turn off auto linking on individual pages from the post editor.', 'link-timestamp' ); ?></li>
+                            </ul>
+                            <h3>Manually link timestamps</h3>
+                            <ul>
+                                <li>&#8226;	<?php _e( 'Manually add links to your timestamps using the Link Timestamp button in the visual editor', 'link-timestamp' ); ?></li>
+                                <li>&#8226;	<?php _e( 'Control what text links to the timestamp', 'link-timestamp' ); ?></li>
+                            </ul>
+                            <h3>Link Timestamp will work with the following:</h3>
+                            <ul>
+                                <li>&#8226;	<?php _e( 'Vimeo videos', 'link-timestamp' ); ?></li>
+                                <li>&#8226;	<?php _e( 'Youtube videos', 'link-timestamp' ); ?></li>
+                                <li>&#8226;	<?php _e( 'HTML5 &lt;audio&gt; elements', 'link-timestamp' ); ?></li>
+                                <li>&#8226;	<?php _e( 'HTML5 &lt;video&gt; elements', 'link-timestamp' ); ?></li>
+                            </ul>
 
                         </div>
                     </div>
