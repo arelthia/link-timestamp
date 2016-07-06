@@ -1,7 +1,6 @@
 <?php
-// Show Errors
-ini_set('log_errors', true);
-ini_set('error_log', dirname(__FILE__).'/errors.log');
+//ini_set('log_errors', true);
+//ini_set('error_log', dirname(__FILE__).'/errors.log');
 /**
  *
  * @link              https://pintopsolutions.com
