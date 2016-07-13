@@ -26,6 +26,11 @@ if ( ! defined( 'WPINC' ) ) {
 }
 define('LINK_TIMESTAMP_NAME', 'link-timestamp');
 define('LINK_TIMESTAMP_VERSION', '1.0');
+define('LINK_TIMESTAMP_DIR', dirname( __FILE__ ));
+// this is the URL our updater / license checker pings. This should be the URL of the site with EDD installed
+define( 'LINK_TIMESTAMP_EDD_STORE_URL', 'https://pintopsolutions.com' ); // you should use your own CONSTANT name, and be sure to replace it throughout this file
+// the name of your product. This should match the download name in EDD exactly
+define( 'LINK_TIMESTAMP_EDD_NAME', 'Link Timestamp' ); // you should use your own CONSTANT name, and be sure to replace it throughout this file
 
 
 function activate_link_timestamp() {
@@ -36,6 +41,7 @@ register_activation_hook( __FILE__, 'activate_link_timestamp' );
 
 
 require plugin_dir_path( __FILE__ ) . 'includes/class-link-timestamp.php';
+require plugin_dir_path( __FILE__ ) . 'includes/ps/lts-license-handler.php';
 
 /**
  * Begins execution of the plugin.
@@ -46,6 +52,7 @@ function run_link_timestamp() {
 
 	$plugin = new Link_Timestamp();
 	$plugin->run();
+
 
 }
 run_link_timestamp();
