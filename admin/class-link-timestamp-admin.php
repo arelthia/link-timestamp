@@ -161,6 +161,7 @@ class Link_Timestamp_Admin {
 			'clean_on_delete'	=> isset($input['clean_on_delete']) && true == $input['clean_on_delete'] ? true : false,
 
 		);
+        return $valid;
 	}
 
 	public function validate_link_on_settings($input){

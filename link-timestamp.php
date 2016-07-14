@@ -24,6 +24,8 @@
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
+
+define('LINK_TIMESTAMP_PLUGIN_FILE', __FILE__ );
 define('LINK_TIMESTAMP_NAME', 'link-timestamp');
 define('LINK_TIMESTAMP_VERSION', '1.0');
 define('LINK_TIMESTAMP_DIR', dirname( __FILE__ ));

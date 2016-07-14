@@ -12,7 +12,7 @@ function lts_plugin_updater() {
     $license_key = trim( get_option( 'lts_license_key' ) );
 
     // setup the updater
-    $edd_updater = new EDD_SL_Plugin_Updater( LINK_TIMESTAMP_EDD_STORE_URL, __FILE__, array(
+    $edd_updater = new EDD_SL_Plugin_Updater( LINK_TIMESTAMP_EDD_STORE_URL, LINK_TIMESTAMP_PLUGIN_FILE, array(
             'version' 	=> LINK_TIMESTAMP_VERSION, 				// current version number
             'license' 	=> $license_key, 		// license key (used get_option above to retrieve from DB)
             'item_name' => LINK_TIMESTAMP_EDD_NAME, 	// name of this plugin
