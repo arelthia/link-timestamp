@@ -19,18 +19,27 @@ class Link_Timestamp_Activator {
 	 * @since    1.0
 	 */
 	public static function activate() {
-		$default_link_on_type 	= array('post' => 1, 'page' => 1);
-		$default_settings = array(
-			'link_audio'			=> 1,
-			'link_video' 			=> 1,
-			'link_youtube' 			=> 1,
-			'link_vimeo' 			=> 1,
-			'auto_link'		=> 0
-		);
-		$default_misc = array('clean_on_delete' => 0);
-		update_option('ps_lts_settings', $default_settings);
-		update_option('ps_lts_link_on', $default_link_on_type);
-		update_option('pt_lts_misc_settings', $default_misc);
+
+        if( !get_option( 'ps_lts_settings' ) ) {
+            $default_link_on_type 	= array('post' => 1, 'page' => 1);
+            $default_settings = array(
+                'link_audio'			=> 1,
+                'link_video' 			=> 1,
+                'link_youtube' 			=> 1,
+                'link_vimeo' 			=> 1,
+                'auto_link'		=> 0
+            );
+            $default_misc = array('clean_on_delete' => 0);
+
+            update_option('ps_lts_settings', $default_settings);
+            update_option('ps_lts_link_on', $default_link_on_type);
+            update_option('pt_lts_misc_settings', $default_misc);
+
+        }
+
+
+
+
 	}
 
 }

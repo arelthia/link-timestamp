@@ -50,10 +50,12 @@ class Link_Timestamp_Public {
 	 * @since    1.0
 	 */
 	public function enqueue_scripts() {
-
+        if (!is_singular()) {
+            return;
+        }
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/link-timestamp-public.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script('ps-lts-vimeo', 'https://player.vimeo.com/api/player.js');
-		wp_enqueue_script('ps-lts-youtube', 'https://www.youtube.com/iframe_api');
+		wp_enqueue_script('ps-lts-vimeo', plugin_dir_url( __FILE__ ) .'js/vimeoplayer.js'); //https://player.vimeo.com/api/player.js
+		wp_enqueue_script('ps-lts-youtube', plugin_dir_url( __FILE__ ) .'js/youtube_iframe_api.js'); //https://www.youtube.com/iframe_api
 		wp_enqueue_script('jquery');
 		// Expose our settings to our Javascript
 		wp_localize_script($this->plugin_name, 'ltsettings', get_option('ps_lts_settings'));
