@@ -90,7 +90,7 @@ var LinkTS = function(time) {
 	}
 
 	/*start soundmanager support for smart podcast player*/
-	if(mejs.length){
+	if (parseInt(lts.settings.link_spp && mejs.length)) {
 		var listSoundIds = soundManager.soundIDs; 
 	    var soundId = soundManager.soundIDs[0];
 	    

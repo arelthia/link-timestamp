@@ -118,6 +118,14 @@ class Link_Timestamp_Admin {
 			'ps_lts_link_section'
 		);
 
+		add_settings_field(
+			'link_spp',
+			__('Link time for embedded Smart Podcast Player', 'link-timestamp'),
+			array($this, 'render_spp_field'),
+			'linktimestamp',
+			'ps_lts_link_section'
+		);
+
 		register_setting(
 			'ps_lts_settings_group',
 			'ps_lts_link_on',
@@ -180,6 +188,7 @@ class Link_Timestamp_Admin {
 			'link_video' 			=> isset($input['link_video']) && true == $input['link_video'] ? true : false,
 			'link_youtube' 			=> isset($input['link_youtube']) && true == $input['link_youtube'] ? true : false,
 			'link_vimeo' 			=> isset($input['link_vimeo']) && true == $input['link_vimeo'] ? true : false,
+			'link_spp' 			=> isset($input['link_spp']) && true == $input['link_spp'] ? true : false,
 			'auto_link' 		=> isset($input['auto_link']) && true == $input['auto_link'] ? true : false
 			/*'pt_lts_clean_on_delete' => isset($input['pt_lts_clean_on_delete']) && true == $input['pt_lts_clean_on_delete'] ? true : false*/
 		);
@@ -252,6 +261,14 @@ class Link_Timestamp_Admin {
         echo '<label class="description">' . __('Link Timestamp in embedded Vimeo videos.', 'link-timestamp' ) . '</label>';
 	}
 
+	public function render_spp_field(){
+        $options = get_option('ps_lts_settings');
+        $link_spp = $options['link_spp'];
+        echo "<input name='ps_lts_settings[link_spp]' type='checkbox'";
+        if ($link_spp) echo ' checked ';
+        echo "/>";
+        echo '<label class="description">' . __('Link Timestamp in embedded Simple Podcast Player Audio.', 'link-timestamp' ) . '</label>';
+	}
 
 	public function render_pt_lts_clean_on_delete_field(){
 		$options = get_option('pt_lts_misc_settings');
