@@ -27,6 +27,7 @@ var LinkTS = function(time) {
 	var audio 		= document.getElementsByTagName('audio'),
 		video 		= document.getElementsByTagName('video'),
 		iframe      = document.getElementsByTagName('iframe'),
+		mejs 		= document.getElementsByClassName('smart-track-player'),
 		timeArray 	= time.split(':').reverse(),
 		seconds 	= parseInt(timeArray[0]),
 		minutes   	= timeArray.length > 1 ? parseInt(timeArray[1]) : 0,
@@ -74,6 +75,7 @@ var LinkTS = function(time) {
 		}
 	}
 
+
 	if (parseInt(lts.settings.link_vimeo && iframe.length)) {
 		for (var i = 0; i < iframe.length; i++) {
 			if (iframe[i].src.search('vimeo') !== -1) {
@@ -87,6 +89,32 @@ var LinkTS = function(time) {
 		}
 	}
 
+	/*start soundmanager support for smart podcast player*/
+	if(mejs.length){
+		var listSoundIds = soundManager.soundIDs; 
+	    var soundId = soundManager.soundIDs[0];
+	    
+	    if (listSoundIds[0] == null) {
+	       	
+	    	document.querySelector( "span.spp-play").click();
+	      	
+	      	soundId = soundManager.soundIDs[0];
+	      
+	      	soundManager.getSoundById(soundId).setPosition(lts.linkTo*1000);
+	    }         
+	    else if (soundManager.getSoundById(soundId).paused) {
+	        soundManager.getSoundById(soundId).setPosition(lts.linkTo*1000);
+	        setTimeout(function(){
+	          soundManager.resume(soundId);
+	        },500);
+	        mejs.className += "spp-playing";
+	    } 
+	    else{ 
+	      	soundManager.getSoundById(soundId).setPosition(lts.linkTo*1000);
+	  }
+	}   
+
+
 	console.log('No audio or video found on page');
 	return;
 };
@@ -96,6 +124,7 @@ jQuery(document).ready( function($) {
 	$('body').on('click','.ps_lts_tslink', function(){
 		timeclicked = $(this).data("time");
 		LinkTS(timeclicked);
+
 	});
 
 });

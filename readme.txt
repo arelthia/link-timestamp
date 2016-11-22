@@ -24,6 +24,7 @@ Manually link timestamps
 Link Timestamp will work with the following:
 *   Vimeo videos
 *   Youtube videos
+* 	Smart Podcast Player
 *   HTML5 <audio> elements
 *   HTML5 <video> elements
 
@@ -68,6 +69,9 @@ You can use the shortcode and have automatically link timestamps enabled. Howeve
 4. Link Timestamp disable automatic link on post checkbox
 
 == Changelog ==
+= 1.1 =
+Add Support for the Smart Podcast Player
+Update Youtube iFrame API
 
 = 1.0 =
 Initial release
