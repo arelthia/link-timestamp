@@ -11,7 +11,7 @@
  * Plugin Name:       Link Timestamp
  * Plugin URI:        https://pintopsolutions.com
  * Description:       Add a link to timestamps on your website. When the link is clicked the audio or video will jump to the correct time in the media player.
- * Version:           1.1
+ * Version:           1.11
  * Author:            Arelthia Phillips
  * Author URI:        https://pintopsolutions.com
  * License:           GPL-2.0+
@@ -27,7 +27,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 define('LINK_TIMESTAMP_PLUGIN_FILE', __FILE__ );
 define('LINK_TIMESTAMP_NAME', 'link-timestamp');
-define('LINK_TIMESTAMP_VERSION', '1.1');
+define('LINK_TIMESTAMP_VERSION', '1.11');
 define('LINK_TIMESTAMP_DIR', dirname( __FILE__ ));
 // this is the URL our updater / license checker pings. This should be the URL of the site with EDD installed
 define( 'LINK_TIMESTAMP_EDD_STORE_URL', 'https://pintopsolutions.com' ); // you should use your own CONSTANT name, and be sure to replace it throughout this file

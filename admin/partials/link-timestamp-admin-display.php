@@ -44,6 +44,7 @@
                             <ul>
                                 <li>&#8226;	<?php _e( 'Vimeo videos', 'link-timestamp' ); ?></li>
                                 <li>&#8226;	<?php _e( 'Youtube videos', 'link-timestamp' ); ?></li>
+                                <li>&#8226; <?php _e( 'Smart Podcast Player', 'link-timestamp' ); ?></li>
                                 <li>&#8226;	<?php _e( 'HTML5 &lt;audio&gt; elements', 'link-timestamp' ); ?></li>
                                 <li>&#8226;	<?php _e( 'HTML5 &lt;video&gt; elements', 'link-timestamp' ); ?></li>
                             </ul>

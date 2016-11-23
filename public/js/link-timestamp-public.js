@@ -95,9 +95,11 @@ var LinkTS = function(time) {
 	    var soundId = soundManager.soundIDs[0];
 	    
 	    if (listSoundIds[0] == null) {
-	       	
-	    	document.querySelector( "span.spp-play").click();
-	      	
+	       	if (document.querySelector('.spp-play-pause') !== null) {
+  				document.querySelector( '.spp-play-pause').click();
+			}else{
+	       	 	document.querySelector( ".spp-play").click();
+	      	}
 	      	soundId = soundManager.soundIDs[0];
 	      
 	      	soundManager.getSoundById(soundId).setPosition(lts.linkTo*1000);

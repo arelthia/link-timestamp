@@ -1,9 +1,9 @@
 === Plugin Name ===
 Contributors: apintop
 Tags: audio, embed, html5, media, plugin, shortcode, video, vimeo, youtube
-Requires at least: 3.0.1
-Tested up to: 4.6
-Stable tag: 1.0
+Requires at least: 4.5
+Tested up to: 4.6.1
+Stable tag: 1.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,9 @@ You can use the shortcode and have automatically link timestamps enabled. Howeve
 4. Link Timestamp disable automatic link on post checkbox
 
 == Changelog ==
+= 1.11 =
+Fix Support for the Smart Podcast Player v2
+
 = 1.1 =
 Add Support for the Smart Podcast Player
 Update Youtube iFrame API
