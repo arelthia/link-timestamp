@@ -267,7 +267,7 @@ class Link_Timestamp_Admin {
         echo "<input name='ps_lts_settings[link_spp]' type='checkbox'";
         if ($link_spp) echo ' checked ';
         echo "/>";
-        echo '<label class="description">' . __('Link Timestamp in embedded Simple Podcast Player Audio.', 'link-timestamp' ) . '</label>';
+        echo '<label class="description">' . __('Link Timestamp in embedded Smart Podcast Player Audio.', 'link-timestamp' ) . '</label>';
 	}
 
 	public function render_pt_lts_clean_on_delete_field(){

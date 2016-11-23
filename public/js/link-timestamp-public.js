@@ -103,6 +103,7 @@ var LinkTS = function(time) {
 	      	soundId = soundManager.soundIDs[0];
 	      
 	      	soundManager.getSoundById(soundId).setPosition(lts.linkTo*1000);
+	      	mejs.className += "spp-playing";
 	    }         
 	    else if (soundManager.getSoundById(soundId).paused) {
 	        soundManager.getSoundById(soundId).setPosition(lts.linkTo*1000);
