@@ -53,9 +53,22 @@ class Link_Timestamp_Public {
         if (!is_singular()) {
             return;
         }
+
+        $options = get_option('ps_lts_settings');
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/link-timestamp-public.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script('ps-lts-vimeo', plugin_dir_url( __FILE__ ) .'js/vimeoplayer.js'); //https://player.vimeo.com/api/player.js
-		wp_enqueue_script('ps-lts-youtube', plugin_dir_url( __FILE__ ) .'js/youtube_iframe_api.js'); //https://www.youtube.com/iframe_api
+		
+		if (isset($options['link_vimeo']) && true == $options['link_vimeo']){
+			wp_enqueue_script('ps-lts-vimeo', plugin_dir_url( __FILE__ ) .'js/vimeoplayer.js'); //https://player.vimeo.com/api/player.js
+		}
+		
+		if(isset($options['link_youtube']) && true == $options['link_youtube']){
+			wp_enqueue_script('ps-lts-youtube', plugin_dir_url( __FILE__ ) .'js/youtube_iframe_api.js'); //https://www.youtube.com/iframe_api
+		}
+		
+		if(isset($options['link_sc']) && true == $options['link_sc']){
+			wp_enqueue_script('ps-lts-soundcloud', plugin_dir_url( __FILE__ ) .'js/soundcloud-api.js'); //https://w.soundcloud.com/player/api.js
+		}
+		
 		wp_enqueue_script('jquery');
 		// Expose our settings to our Javascript
 		wp_localize_script($this->plugin_name, 'ltsettings', get_option('ps_lts_settings'));
