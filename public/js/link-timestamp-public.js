@@ -57,6 +57,7 @@ var LinkTS = function(time) {
 		return;
 	}
 
+	/*start youtube support*/
 	if (parseInt(lts.settings.link_youtube && iframe.length)) {
 
 		for (var i = 0; i < iframe.length; i++) {
@@ -76,7 +77,9 @@ var LinkTS = function(time) {
 	}
 
 
+	/*start vimeo support*/
 	if (parseInt(lts.settings.link_vimeo && iframe.length)) {
+
 		for (var i = 0; i < iframe.length; i++) {
 			if (iframe[i].src.search('vimeo') !== -1) {
 				lts.doSkip = lts.doVimeolts;
@@ -104,6 +107,7 @@ var LinkTS = function(time) {
 	      
 	      	soundManager.getSoundById(soundId).setPosition(lts.linkTo*1000);
 	      	mejs.className += "spp-playing";
+	      	return;
 	    }         
 	    else if (soundManager.getSoundById(soundId).paused) {
 	        soundManager.getSoundById(soundId).setPosition(lts.linkTo*1000);
@@ -111,11 +115,31 @@ var LinkTS = function(time) {
 	          soundManager.resume(soundId);
 	        },500);
 	        mejs.className += "spp-playing";
+	        return;
 	    } 
 	    else{ 
 	      	soundManager.getSoundById(soundId).setPosition(lts.linkTo*1000);
+	      	return;
 	  }
 	}   
+
+	/*start soundcloud*/
+	if (parseInt(lts.settings.link_sc && iframe.length)) {
+		var soundCloudIframe = document.querySelector('iframe'),
+		soundCloudWidget = SC.Widget(soundCloudIframe);
+	
+		soundCloudWidget.bind(SC.Widget.Events.PLAY, function() {
+
+			soundCloudWidget.seekTo(lts.linkTo*1000);
+			soundCloudWidget.unbind(SC.Widget.Events.PLAY);
+
+		});  
+	
+		soundCloudWidget.play();
+		return;
+	}
+
+
 
 
 	console.log('No audio or video found on page');
@@ -127,7 +151,12 @@ jQuery(document).ready( function($) {
 	$('body').on('click','.ps_lts_tslink', function(){
 		timeclicked = $(this).data("time");
 		LinkTS(timeclicked);
-
 	});
 
 });
+
+
+function dothis(e){
+
+
+}

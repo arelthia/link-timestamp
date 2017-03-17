@@ -126,6 +126,14 @@ class Link_Timestamp_Admin {
 			'ps_lts_link_section'
 		);
 
+		add_settings_field(
+			'link_sc',
+			__('Link time for SoundCloud embedded player', 'link-timestamp'),
+			array($this, 'render_sc_field'),
+			'linktimestamp',
+			'ps_lts_link_section'
+		);
+
 		register_setting(
 			'ps_lts_settings_group',
 			'ps_lts_link_on',
@@ -189,6 +197,7 @@ class Link_Timestamp_Admin {
 			'link_youtube' 			=> isset($input['link_youtube']) && true == $input['link_youtube'] ? true : false,
 			'link_vimeo' 			=> isset($input['link_vimeo']) && true == $input['link_vimeo'] ? true : false,
 			'link_spp' 			=> isset($input['link_spp']) && true == $input['link_spp'] ? true : false,
+			'link_sc' 			=> isset($input['link_sc']) && true == $input['link_sc'] ? true : false,
 			'auto_link' 		=> isset($input['auto_link']) && true == $input['auto_link'] ? true : false
 			/*'pt_lts_clean_on_delete' => isset($input['pt_lts_clean_on_delete']) && true == $input['pt_lts_clean_on_delete'] ? true : false*/
 		);
@@ -268,6 +277,15 @@ class Link_Timestamp_Admin {
         if ($link_spp) echo ' checked ';
         echo "/>";
         echo '<label class="description">' . __('Link Timestamp in embedded Smart Podcast Player Audio.', 'link-timestamp' ) . '</label>';
+	}
+
+	public function render_sc_field(){
+        $options = get_option('ps_lts_settings');
+        $link_sc = $options['link_sc'];
+        echo "<input name='ps_lts_settings[link_sc]' type='checkbox'";
+        if ($link_sc) echo ' checked ';
+        echo "/>";
+        echo '<label class="description">' . __('Link Timestamp in SoundCloud embedded player.', 'link-timestamp' ) . '</label>';
 	}
 
 	public function render_pt_lts_clean_on_delete_field(){
