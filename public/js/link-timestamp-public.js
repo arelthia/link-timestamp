@@ -8,7 +8,9 @@ var lts = {
 	doHTML5lts: function() {
 		lts.media.removeEventListener('canplaythrough', lts.doHTML5lts);
 		lts.media.currentTime = lts.linkTo;
-		lts.media.play();
+  		lts.media.play();
+		
+		
 	},
 
 	doYoutubelts: function() {
@@ -54,6 +56,7 @@ var LinkTS = function(time) {
 		lts.media.addEventListener('canplaythrough', lts.doHTML5lts);
 		lts.media.load();
 		lts.media.play();
+		
 		return;
 	}
 

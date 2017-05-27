@@ -1,9 +1,9 @@
 === Plugin Name ===
 Contributors: apintop
 Tags: audio, embed, html5, media, plugin, shortcode, video, vimeo, youtube
-Requires at least: 4.5
-Tested up to: 4.6.1
-Stable tag: 1.11
+Requires at least: 4.7
+Tested up to: 4.8
+Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +24,9 @@ Manually link timestamps
 Link Timestamp will work with the following:
 *   Vimeo videos
 *   Youtube videos
-* 	Smart Podcast Player
+* 	Smart Podcast Track Player
+*   Soundcloud Embeded Player
+*   Blubrry PowerPress Players
 *   HTML5 <audio> elements
 *   HTML5 <video> elements
 
@@ -47,6 +49,17 @@ Link Timestamp will work with the following:
 1. Activate the plugin in the Plugins dashboard
 
 == Frequently Asked Questions ==
+= Will it work with the Soundcloud Embeded Player?=
+
+Yes
+
+= Will it work with the Blubrry PowerPress Player?=
+
+Yes
+
+= Will it work with the Smart Podcast Player?=
+
+Yes, It will work with the Smart Podcast Track Player.
 
 = Will it work with an embeded Vimeo video?=
 
@@ -56,7 +69,7 @@ Yes
 
 Yes it works with a Youtube embeded video using just the url or using [embed].  It will not work with the old Youtube embed that uses the <iframe> code.
 
-= Can I usethe shortcodes and automatically linked timestamps? =
+= Can I use the shortcodes and automatically linked timestamps? =
 
 You can use the shortcode and have automatically link timestamps enabled. However, they will not both work on the same content. If you have the shortcode on a post/page links will not be linked automatically for that post/page.
 
@@ -69,6 +82,11 @@ You can use the shortcode and have automatically link timestamps enabled. Howeve
 4. Link Timestamp disable automatic link on post checkbox
 
 == Changelog ==
+= 2.0 =
+Add Support for SoundCloud
+Fix bug that prevented Youtube embeds from working if start time provided
+Updated license classto provide better messages on activation
+
 = 1.11 =
 Fix Support for the Smart Podcast Player v2
 

@@ -28,7 +28,7 @@
                             <h3>Automatically link timestamps</h3>
                            <ul>
                                <li>&#8226;	<?php _e( 'Link Timestamp can be configured to automatically link timestamps.', 'link-timestamp' ); ?></li>
-                               <li>&#8226;	<?php _e( 'By checking LInk Timestamps automatically timestamps formatted like \'1:15:25\' or \'1:15\' or \'00:45\' in your posts will be automatically replaced with a link to the correct 
+                               <li>&#8226;	<?php _e( 'By checking Link Timestamps automatically timestamps formatted like \'1:15:25\' or \'1:15\' or \'00:45\' in your posts will be automatically replaced with a link to the correct 
         timestamp.', 'link-timestamp' ); ?></li>
                                <li>&#8226;	<?php _e( 'Control which post type gets automatically linked from the settings page. (Settings > Link Timestamp)', 'link-timestamp' ); ?></li>
                                <li>&#8226;	<?php _e( 'Control if timestamps are linked to audio or video. (Settings > Link Timestamp) This comes in handy if you have audio and video on the same page.

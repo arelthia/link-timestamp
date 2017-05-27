@@ -161,7 +161,7 @@ class Link_Timestamp_Public {
      */
     public function enable_youtube_js_api($html) {
         if (strstr($html, 'youtube.com/embed/')) {
-            $html = str_replace('?feature=oembed', '?feature=oembed&enablejsapi=1', $html);
+            $html = str_replace('feature=oembed', 'feature=oembed&enablejsapi=1', $html);
         }
         return $html;
     }
