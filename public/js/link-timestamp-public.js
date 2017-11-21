@@ -99,7 +99,7 @@ var LinkTS = function(time) {
 	if (parseInt(lts.settings.link_spp && mejs.length)) {
 		var listSoundIds = soundManager.soundIDs; 
 	    var soundId = soundManager.soundIDs[0];
-	    
+    
 	    if (listSoundIds[0] == null) {
 	       	if (document.querySelector('.spp-play-pause') !== null) {
   				document.querySelector( '.spp-play-pause').click();
@@ -116,7 +116,7 @@ var LinkTS = function(time) {
 	        soundManager.getSoundById(soundId).setPosition(lts.linkTo*1000);
 	        setTimeout(function(){
 	          soundManager.resume(soundId);
-	        },500);
+	        },500);  
 	        mejs.className += "spp-playing";
 	        return;
 	    } 
@@ -128,21 +128,22 @@ var LinkTS = function(time) {
 
 	/*start soundcloud*/
 	if (parseInt(lts.settings.link_sc && iframe.length)) {
-		var soundCloudIframe = document.querySelector('iframe'),
-		soundCloudWidget = SC.Widget(soundCloudIframe);
-	
-		soundCloudWidget.bind(SC.Widget.Events.PLAY, function() {
+		for (var i = 0; i < iframe.length; i++) {
+			if (iframe[i].src.search('soundcloud') !== -1) {
+				var soundCloudIframe = document.querySelector('iframe'),
+				soundCloudWidget = SC.Widget(soundCloudIframe);
+				soundCloudWidget.bind(SC.Widget.Events.PLAY, function() {
 
-			soundCloudWidget.seekTo(lts.linkTo*1000);
-			soundCloudWidget.unbind(SC.Widget.Events.PLAY);
+					soundCloudWidget.seekTo(lts.linkTo*1000);
+					soundCloudWidget.unbind(SC.Widget.Events.PLAY);
 
-		});  
-	
-		soundCloudWidget.play();
-		return;
+				});  
+			
+				soundCloudWidget.play();
+				return;
+			}
+		}	
 	}
-
-
 
 
 	console.log('No audio or video found on page');

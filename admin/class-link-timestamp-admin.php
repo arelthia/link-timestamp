@@ -134,6 +134,8 @@ class Link_Timestamp_Admin {
 			'ps_lts_link_section'
 		);
 
+		
+
 		register_setting(
 			'ps_lts_settings_group',
 			'ps_lts_link_on',
@@ -287,6 +289,7 @@ class Link_Timestamp_Admin {
         echo "/>";
         echo '<label class="description">' . __('Link Timestamp in SoundCloud embedded player.', 'link-timestamp' ) . '</label>';
 	}
+
 
 	public function render_pt_lts_clean_on_delete_field(){
 		$options = get_option('pt_lts_misc_settings');

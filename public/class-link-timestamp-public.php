@@ -69,6 +69,7 @@ class Link_Timestamp_Public {
 			wp_enqueue_script('ps-lts-soundcloud', plugin_dir_url( __FILE__ ) .'js/soundcloud-api.js'); //https://w.soundcloud.com/player/api.js
 		}
 		
+
 		wp_enqueue_script('jquery');
 		// Expose our settings to our Javascript
 		wp_localize_script($this->plugin_name, 'ltsettings', get_option('ps_lts_settings'));
