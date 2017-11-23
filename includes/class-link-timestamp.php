@@ -150,6 +150,8 @@ class Link_Timestamp {
 		$plugin_admin = new Link_Timestamp_Admin( $this->get_plugin_name(), $this->get_version() );
 		$plugin_mce_buttons = new link_timestamp_mce_button();
 		$plugin_metaboxes = new link_timestamp_metabox();
+		
+		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_admin_style' );
 		$this->loader->add_action('admin_menu', $plugin_admin, 'add_lts_menu' );
 		$this->loader->add_action('admin_init', $plugin_admin, 'register_lts_options' );
 		$this->loader->add_action( 'admin_head', $plugin_mce_buttons, 'ps_lts_add_mce_button' );

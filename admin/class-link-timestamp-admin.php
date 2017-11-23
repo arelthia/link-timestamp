@@ -43,6 +43,16 @@ class Link_Timestamp_Admin {
 
 	}
 
+	public function enqueue_admin_style($hook) {
+
+        if ($hook != 'settings_page_linktimestamp') {
+            return;
+        }
+
+        wp_enqueue_style( 'custom_wp_admin_css', plugin_dir_url( __FILE__ ) . 'css/link-timestamp-admin.css' );
+		
+		
+	}
 
 
 	public function add_lts_menu(){
@@ -150,6 +160,33 @@ class Link_Timestamp_Admin {
 			'ps_lts_link_section'
 		);
 
+		register_setting(
+			'ps_lts_settings_group',
+			'ps_lts_by_cat',
+			array($this,'validate_by_cat_settings')
+		);
+
+		add_settings_field(
+			'ps_lts_by_cat',
+			__('Only link time stamps on specific post categories', 'link-timestamp'),
+			array($this, 'render_by_cat_field'),
+			'linktimestamp',
+			'ps_lts_link_section'
+		);
+
+		register_setting(
+			'ps_lts_settings_group',
+			'ps_lts_link_cat',
+			array($this,'validate_link_cat_settings')
+		);
+
+		add_settings_field(
+			'ps_lts_link_cat',
+			__('Categories to auto link timestamps on (Single post in category only)', 'link-timestamp'),
+			array($this, 'render_link_cat_field'),
+			'linktimestamp',
+			'ps_lts_link_section'
+		);
 
 		add_settings_section(
 			'ps_lts_misc_section',
@@ -181,6 +218,29 @@ class Link_Timestamp_Admin {
 		);
         return $valid;
 	}
+
+
+
+	public function validate_by_cat_settings($input){
+        
+        $valid = isset($input) && true == $input ? true : false;
+
+       
+
+		return $valid;
+	}
+
+	public function validate_link_cat_settings($input){
+        $cats = get_categories();
+        $valid = array();
+
+        foreach( $cats as $val) {
+           $valid[$val->name] = isset($input[$val->name]) && true == $input[$val->name] ? true : false;
+        }
+
+		return $valid;
+	}
+
 
 	public function validate_link_on_settings($input){
         $post_types = get_post_types();
@@ -229,6 +289,31 @@ class Link_Timestamp_Admin {
 			echo '<label><input name="ps_lts_link_on['. $type .']" id="ps_lts_link_on['. $type .']" type="checkbox" value="1" class="code" ' . checked( 1, $options[$type], false ) . ' />'. $type .'</label><br />' ;
 
 		}
+    }
+
+    public function render_link_cat_field(){
+        $cats = get_categories();
+        $options = (array)get_option('ps_lts_link_cat');
+
+
+        foreach ( $cats as $val ) {
+     	
+            if( !isset($options[$val->name]) ){
+                $options[$val->name] = 0;
+            }
+			echo '<label><input name="ps_lts_link_cat['. $val->name .']" id="ps_lts_link_cat['. $val->name .']" type="checkbox" value="1" class="code" ' . checked( 1, $options[$val->name], false ) . ' />'. $val->name .'</label><br />' ;
+
+		}
+    }
+
+    public function render_by_cat_field(){
+    	$option = get_option('ps_lts_by_cat');
+
+    	echo '<label class="switch">';
+		echo '<input name="ps_lts_by_cat" id="ps_lts_by_cat" type="checkbox"';
+		if ($option) echo ' checked ';
+		echo '>';
+		echo '<span class="slider round"></span></label>';
     }
 
 	public function render_audio_field(){

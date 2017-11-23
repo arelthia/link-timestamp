@@ -115,8 +115,11 @@ class Link_Timestamp_Public {
      */
     public function do_autolink($content) {
 		$type = get_post_type( get_the_ID() );
+		$cats = wp_get_post_categories( get_the_ID() );
 		$options = get_option('ps_lts_settings');
 		$link_on_option = get_option('ps_lts_link_on');
+		$by_cat_option = get_option('ps_lts_by_cat');
+		$link_cat_option = get_option('ps_lts_link_cat');
 
 		// Don't autolink if it's turned off.
 
@@ -126,6 +129,25 @@ class Link_Timestamp_Public {
 		// Don't autolink if post type is not enabled or n
 		if (!$link_on_option[$type] || !is_singular()) {
 			return $content;
+		}
+
+		
+		if ($by_cat_option){
+			$show_on_cat = false;
+
+			foreach ( $cats as $value) {
+			
+				$current = get_cat_name( $value );
+				if($link_cat_option[$current]){
+					$show_on_cat = true;
+				}
+				
+			}		
+			//don't autolink if post category is not checked
+			if(!$show_on_cat){
+				return $content;
+			}
+							
 		}
 
 		// Don't autolink if they've turned off autolinking for this page.

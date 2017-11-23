@@ -21,7 +21,8 @@ class Link_Timestamp_Activator {
 	public static function activate() {
 
         if( !get_option( 'ps_lts_settings' ) ) {
-            $default_link_on_type 	= array('post' => 1, 'page' => 1);
+            $default_link_on_type   = array('post' => 1, 'page' => 1);
+            $default_link_cats 	= array();
             $default_settings = array(
                 'link_audio'			=> 1,
                 'link_video' 			=> 1,
@@ -33,6 +34,7 @@ class Link_Timestamp_Activator {
 
             update_option('ps_lts_settings', $default_settings);
             update_option('ps_lts_link_on', $default_link_on_type);
+            update_option('ps_lts_link_cat', $default_link_cats);
             update_option('pt_lts_misc_settings', $default_misc);
 
         }
