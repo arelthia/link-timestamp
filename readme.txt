@@ -82,6 +82,9 @@ You can use the shortcode and have automatically link timestamps enabled. Howeve
 4. Link Timestamp disable automatic link on post checkbox
 
 == Changelog ==
+= 2.1 =
+Add ability to only auto link on posts with a specific category
+
 = 2.0 =
 Add Support for SoundCloud
 Fix bug that prevented Youtube embeds from working if start time provided

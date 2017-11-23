@@ -23,6 +23,7 @@ class Link_Timestamp_Activator {
         if( !get_option( 'ps_lts_settings' ) ) {
             $default_link_on_type   = array('post' => 1, 'page' => 1);
             $default_link_cats 	= array();
+            $default_link_by_cats = 0;
             $default_settings = array(
                 'link_audio'			=> 1,
                 'link_video' 			=> 1,
@@ -31,7 +32,8 @@ class Link_Timestamp_Activator {
                 'auto_link'		=> 0
             );
             $default_misc = array('clean_on_delete' => 0);
-
+            
+            update_option('ps_lts_by_cat', $default_link_by_cats);
             update_option('ps_lts_settings', $default_settings);
             update_option('ps_lts_link_on', $default_link_on_type);
             update_option('ps_lts_link_cat', $default_link_cats);

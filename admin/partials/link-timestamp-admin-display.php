@@ -49,6 +49,11 @@
                                 <li>&#8226;	<?php _e( 'HTML5 &lt;audio&gt; elements', 'link-timestamp' ); ?></li>
                                 <li>&#8226;	<?php _e( 'HTML5 &lt;video&gt; elements', 'link-timestamp' ); ?></li>
                             </ul>
+                            <h3>Control Autolinking</h3>
+                            <ul>
+                                <li>&#8226; <?php _e( 'Auto link on single posts that are a specific post type', 'link-timestamp' ); ?></li>
+                                <li>&#8226; <?php _e( 'Auto link on single posts that belong to a specific category', 'link-timestamp' ); ?></li>
+                            </ul>    
                             <h3><?php $url2 = 'https://https://pintopsolutions.com/contact/';
                                 $link2     = sprintf( __( 'Need help? Or have an idea how this plugin can be made better. Reach out <a href=%s>on our website?</a>', 'link-timestamp' ), esc_url( $url2 ) );
                                 echo $link2; ?></h3>

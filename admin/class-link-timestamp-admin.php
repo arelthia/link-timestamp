@@ -270,9 +270,10 @@ class Link_Timestamp_Admin {
 	public function render_auto_link_field(){
         $options = get_option('ps_lts_settings');
         $auto_link = $options['auto_link'];
-        echo "<input name='ps_lts_settings[auto_link]' type='checkbox'";
+        echo "<label class='switch'><input name='ps_lts_settings[auto_link]' type='checkbox'";
         if ($auto_link) echo ' checked ';
         echo "/>";
+        echo '<span class="slider round"></span></label>';
        
 	}
 
@@ -319,10 +320,12 @@ class Link_Timestamp_Admin {
 	public function render_audio_field(){
         $options = get_option('ps_lts_settings');
         $link_audio = $options['link_audio'];
+        echo '<label class="switch">';
         echo "<input name='ps_lts_settings[link_audio]' type='checkbox'";
         if ($link_audio) echo ' checked ';
         echo "/>";
-        echo '<label class="description">' . __('Link Timestamp in audio embedded with the [audio] 
+        echo '<span class="slider round"></span></label>';
+        echo '<label class="description">' . __('  Link Timestamp in audio embedded with the [audio] 
         shortcode or &lt;audio&gt; HTML5 tag.', 'link-timestamp' ) . '</label>';
 
 	}
@@ -331,58 +334,70 @@ class Link_Timestamp_Admin {
 	public function render_video_field(){
         $options = get_option('ps_lts_settings');
         $link_video = $options['link_video'];
+        echo '<label class="switch">';
         echo "<input name='ps_lts_settings[link_video]' type='checkbox'";
         if ($link_video) echo ' checked ';
         echo "/>";
-        echo '<label class="description">' . __('Link Timestamp in audio embedded with the [video] 
+        echo '<span class="slider round"></span></label>';
+        echo '<label class="description">' . __('  Link Timestamp in audio embedded with the [video] 
         shortcode or &lt;video&gt; HTML5 tag.', 'link-timestamp' ) . '</label>';
 	}
 
 	public function render_youtube_field(){
         $options = get_option('ps_lts_settings');
         $link_youtube = $options['link_youtube'];
+        echo '<label class="switch">';
         echo "<input name='ps_lts_settings[link_youtube]' type='checkbox'";
         if ($link_youtube) echo ' checked ';
         echo "/>";
-        echo '<label class="description">' . __('Link Timestamp in embedded Youtube videos.', 'link-timestamp' ) . '</label>';
+        echo '<span class="slider round"></span></label>';
+        echo '<label class="description">' . __('  Link Timestamp in embedded Youtube videos.', 'link-timestamp' ) . '</label>';
 
 	}
 
 	public function render_vimeo_field(){
         $options = get_option('ps_lts_settings');
         $link_vimeo = $options['link_vimeo'];
+        echo '<label class="switch">';
         echo "<input name='ps_lts_settings[link_vimeo]' type='checkbox'";
         if ($link_vimeo) echo ' checked ';
         echo "/>";
-        echo '<label class="description">' . __('Link Timestamp in embedded Vimeo videos.', 'link-timestamp' ) . '</label>';
+        echo '<span class="slider round"></span></label>';
+        echo '<label class="description">' . __('  Link Timestamp in embedded Vimeo videos.', 'link-timestamp' ) . '</label>';
 	}
 
 	public function render_spp_field(){
         $options = get_option('ps_lts_settings');
         $link_spp = $options['link_spp'];
+        echo '<label class="switch">';
         echo "<input name='ps_lts_settings[link_spp]' type='checkbox'";
         if ($link_spp) echo ' checked ';
         echo "/>";
-        echo '<label class="description">' . __('Link Timestamp in embedded Smart Podcast Player Audio.', 'link-timestamp' ) . '</label>';
+        echo '<span class="slider round"></span></label>';
+        echo '<label class="description">' . __('  Link Timestamp in embedded Smart Podcast Player Audio.', 'link-timestamp' ) . '</label>';
 	}
 
 	public function render_sc_field(){
         $options = get_option('ps_lts_settings');
         $link_sc = $options['link_sc'];
+        echo '<label class="switch">';
         echo "<input name='ps_lts_settings[link_sc]' type='checkbox'";
         if ($link_sc) echo ' checked ';
         echo "/>";
-        echo '<label class="description">' . __('Link Timestamp in SoundCloud embedded player.', 'link-timestamp' ) . '</label>';
+        echo '<span class="slider round"></span></label>';
+        echo '<label class="description">' . __('  Link Timestamp in SoundCloud embedded player.', 'link-timestamp' ) . '</label>';
 	}
 
 
 	public function render_pt_lts_clean_on_delete_field(){
 		$options = get_option('pt_lts_misc_settings');
 		$clean = isset($options['clean_on_delete']) && true == $options['clean_on_delete'] ? 1 : 0;
+		echo '<label class="switch">';
 		echo "<input name='pt_lts_misc_settings[clean_on_delete]' type='checkbox'";
 		if ($clean) echo ' checked ';
 		echo "/>";
-		echo '<label class="description">' . __('Check this box if you would like Link Timestamp to completely remove all of its data when the plugin is deleted. This includes removing the shortcode from posts.', 'link-timestamp' ) . '</label>';
+		echo '<span class="warning slider round"></span></label>';
+		echo '<label class="description">' . __(' Check this box if you would like Link Timestamp to completely remove all of its data when the plugin is deleted. This includes removing the shortcode from posts.', 'link-timestamp' ) . '</label>';
 	}
 
     public function render_link_section(){
