@@ -1,9 +1,9 @@
 === Plugin Name ===
 Contributors: apintop
 Tags: audio, embed, html5, media, plugin, shortcode, video, vimeo, youtube
-Requires at least: 4.7
-Tested up to: 4.8
-Stable tag: 2.0
+Requires at least: 4.9
+Tested up to: 5
+Stable tag: 2.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,6 +82,9 @@ You can use the shortcode and have automatically link timestamps enabled. Howeve
 4. Link Timestamp disable automatic link on post checkbox
 
 == Changelog ==
+= 2.1.1 =
+Fix update issue
+
 = 2.1 =
 Add ability to only auto link on posts with a specific category
 

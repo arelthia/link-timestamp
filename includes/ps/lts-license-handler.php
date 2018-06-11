@@ -16,6 +16,7 @@ function lts_plugin_updater() {
             'version' 	=> LINK_TIMESTAMP_VERSION, 				// current version number
             'license' 	=> $license_key, 		// license key (used get_option above to retrieve from DB)
             'item_name' => LINK_TIMESTAMP_EDD_NAME, 	// name of this plugin
+            'item_id' => LINK_TIMESTAMP_EDD_ID,     // download id of this plugin
             'author' 	=> 'Arelthia Phillips',  // author of this plugin
             'beta'      => LINK_TIMESTAMP_BETA
         )
