@@ -29,7 +29,10 @@ class Link_Timestamp_Activator {
                 'link_video' 			=> 1,
                 'link_youtube' 			=> 1,
                 'link_vimeo' 			=> 1,
-                'auto_link'		=> 0
+                'link_libsyn'           => 0,
+                'link_sc'               => 0,
+                'link_spp'              => 0,
+                'auto_link'		        => 0
             );
             $default_misc = array('clean_on_delete' => 0);
             

@@ -70,6 +70,11 @@ class Link_Timestamp_Public {
 		}
 		
 
+		if(isset($options['link_libsyn']) && true == $options['link_libsyn']){
+			wp_enqueue_script('ps-lts-libsyn', plugin_dir_url( __FILE__ ) .'js/player-0.1.0.min.js'); 
+			//https://github.com/embedly/player.js/blob/master/dist/player-0.1.0.min.js
+		}
+
 		wp_enqueue_script('jquery');
 		// Expose our settings to our Javascript
 		wp_localize_script($this->plugin_name, 'ltsettings', get_option('ps_lts_settings'));

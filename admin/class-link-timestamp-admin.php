@@ -144,7 +144,13 @@ class Link_Timestamp_Admin {
 			'ps_lts_link_section'
 		);
 
-		
+		add_settings_field(
+			'link_libsyn',
+			__('Link time for the Libsyn embedded player', 'link-timestamp'),
+			array($this, 'render_libsyn_field'),
+			'linktimestamp',
+			'ps_lts_link_section'
+		);
 
 		register_setting(
 			'ps_lts_settings_group',
@@ -260,6 +266,7 @@ class Link_Timestamp_Admin {
 			'link_vimeo' 			=> isset($input['link_vimeo']) && true == $input['link_vimeo'] ? true : false,
 			'link_spp' 			=> isset($input['link_spp']) && true == $input['link_spp'] ? true : false,
 			'link_sc' 			=> isset($input['link_sc']) && true == $input['link_sc'] ? true : false,
+			'link_libsyn' 			=> isset($input['link_libsyn']) && true == $input['link_libsyn'] ? true : false,
 			'auto_link' 		=> isset($input['auto_link']) && true == $input['auto_link'] ? true : false
 			/*'pt_lts_clean_on_delete' => isset($input['pt_lts_clean_on_delete']) && true == $input['pt_lts_clean_on_delete'] ? true : false*/
 		);
@@ -386,6 +393,17 @@ class Link_Timestamp_Admin {
         echo "/>";
         echo '<span class="slider round"></span></label>';
         echo '<label class="description">' . __('  Link Timestamp in SoundCloud embedded player.', 'link-timestamp' ) . '</label>';
+	}
+
+	public function render_libsyn_field(){
+        $options = get_option('ps_lts_settings');
+        $link_libsyn = $options['link_libsyn'];
+        echo '<label class="switch">';
+        echo "<input name='ps_lts_settings[link_libsyn]' type='checkbox'";
+        if ($link_libsyn) echo ' checked ';
+        echo "/>";
+        echo '<span class="slider round"></span></label>';
+        echo '<label class="description">' . __('  Link Timestamp in Libsyn HTML5 player.', 'link-timestamp' ) . '</label>';
 	}
 
 

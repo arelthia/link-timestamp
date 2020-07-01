@@ -20,6 +20,10 @@ var lts = {
 
 	doVimeolts: function() {
 		lts.media.setCurrentTime(lts.linkTo);
+	},
+
+	doLibsynlts: function() {
+		lts.media.setCurrentTime(lts.linkTo);
 	}
 
 };
@@ -143,6 +147,26 @@ var LinkTS = function(time) {
 				return;
 			}
 		}	
+	}
+
+
+		/*start libsyn support*/
+	if (parseInt(lts.settings.link_libsyn && iframe.length)) {
+
+		for (var i = 0; i < iframe.length; i++) {
+			if (iframe[i].src.search('libsyn') !== -1) {
+				lts.doSkip = lts.doLibsynlts;
+				iframe[i].id = 'lts-libsyn-player';
+				playerframe = document.getElementById('lts-libsyn-player');
+				var lsplayer = new playerjs.Player(playerframe);
+				lts.media = lsplayer;
+				lsplayer.on('ready', lts.doLibsynlts);
+				/*lsplayer.on('ready', function(){
+				  lsplayer.setCurrentTime(lts.linkTo);
+				});*/
+				return;
+			}
+		}
 	}
 
 
