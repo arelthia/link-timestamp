@@ -68,7 +68,7 @@ var LinkTS = function(time) {
 
 				lts.doSkip = lts.doYoutubelts;
 
-				iframe[0].id = 'lts-youtube-player';
+				iframe[i].id = 'lts-youtube-player';
 				lts.media = new YT.Player('lts-youtube-player', {
 					events: {
 						onReady: lts.doYoutubelts
@@ -84,9 +84,9 @@ var LinkTS = function(time) {
 	if (parseInt(lts.settings.link_vimeo && iframe.length)) {
 
 		for (var i = 0; i < iframe.length; i++) {
-			if (iframe[i].src.search('vimeo') !== -1) {
+			if (iframe[i].src.includes('vimeo')) {
 				lts.doSkip = lts.doVimeolts;
-				iframe[0].id = 'lts-vimeo-player';
+				iframe[i].id = 'lts-vimeo-player';
 				lts.media = new Vimeo.Player('lts-vimeo-player');
 				lts.media.on('play', lts.doVimeolts );
 				lts.media.play();
