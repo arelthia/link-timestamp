@@ -82,6 +82,10 @@ You can use the shortcode and have automatically link timestamps enabled. Howeve
 4. Link Timestamp disable automatic link on post checkbox
 
 == Changelog ==
+
+= 2.2 =
+Updated Vimeo api 
+
 = 2.1.1 =
 Fix update issue
 
