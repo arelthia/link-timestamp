@@ -32,6 +32,7 @@ class Link_Timestamp_Activator {
                 'link_libsyn'           => 0,
                 'link_sc'               => 0,
                 'link_spp'              => 0,
+                'link_spreaker'         => 0,
                 'auto_link'		        => 0
             );
             $default_misc = array('clean_on_delete' => 0);

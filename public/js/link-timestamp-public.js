@@ -5,7 +5,8 @@ var lts = {
 	isHTML5: false,
 	isYoutube: false,
 	isVimeo: true,
-	isLibsyn:false,
+	isLibsyn: false,
+	isDynamic: false,
 
 	doHTML5lts: function() {
 		isHTML5 = true;
@@ -32,7 +33,7 @@ var lts = {
 	doLibsynlts: function() {
 		isLibsyn = true;
 		lts.media.setCurrentTime(lts.linkTo);
-		lts.media.play();
+		//lts.media.play();
 	}
 
 };
@@ -81,6 +82,7 @@ var LinkTS = function(time) {
 				lts.doSkip = lts.doYoutubelts;
 
 				iframe[i].id = 'lts-youtube-player';
+				//location.href = '#' + iframe[i].id;
 				lts.media = new YT.Player('lts-youtube-player', {
 					events: {
 						onReady: lts.doYoutubelts
@@ -170,13 +172,35 @@ var LinkTS = function(time) {
 				lts.media = lsplayer;
 				
 				lts.media.on('ready', lts.doLibsynlts);
-				/*lsplayer.on('ready', function(){
-				  lsplayer.setCurrentTime(lts.linkTo);
-				});*/
+				
+				return;
+			}
+		}
+	}
 
-				/*lts.media.on('ended', function(){
-				  console.log('unable to play media');
-				});*/
+		/*start spreaker support*/
+	if (parseInt(lts.settings.link_spreaker && iframe.length)) {
+
+		for (var i = 0; i < iframe.length; i++) {
+			if (iframe[i].src.search('spreaker') !== -1) {
+				lts.doSkip = function(){
+					lts.media.seek(lts.linkTo * 1000);
+				};
+				iframe[i].id = iframe[i].hasAttribute('id') ? iframe[i].id : 'lts-spreaker-player';		
+				
+				lts.media = SP.getWidget(iframe[i].id);
+
+				//lts.media = SP.getWidget(iframe[i]);
+				
+				lts.media.seek(lts.linkTo * 1000);
+
+				if(lts.isDynamic != true){
+					lts.media.play();
+				}
+				
+
+				//lts.media.play();
+
 				return;
 			}
 		}
@@ -190,12 +214,13 @@ var LinkTS = function(time) {
 jQuery(document).ready( function($) {
     $('.ps_lts_tslink').css('cursor', 'pointer');
 	$('body').on('click','.ps_lts_tslink', function(){
+		lts.isDynamic = false;
 		timeclicked = $(this).data("time");
 		LinkTS(timeclicked);
 	});
 });
 
-//if link to vided at timestamp is enabled
+//if link to timestamp on another page is enabled
 window.addEventListener('load', function(){
   	if( lts.isLibsyn ){
 		return;
@@ -205,9 +230,12 @@ window.addEventListener('load', function(){
 	if(queryString != ''){
 		const ltsUrlParams = new URLSearchParams(queryString);
 		if (ltsUrlParams.has('ltstime')){
+			lts.isDynamic = true;
 			timeclicked = ltsUrlParams.get('ltstime');
 			LinkTS(timeclicked);
+			
 		}
 
 	}
+
 });

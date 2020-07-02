@@ -83,6 +83,11 @@ You can use the shortcode and have automatically link timestamps enabled. Howeve
 
 == Changelog ==
 
+= 2.3 =
+Add support for Libsyn Embeded Player
+Add support for Spreaker Embedded Player with JS API
+Add support for linking to a timestamp from a different page
+
 = 2.2 =
 Updated Vimeo api 
 Fix index error for iframe embeds.
