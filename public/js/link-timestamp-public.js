@@ -4,8 +4,11 @@ var lts = {
 	linkTo: undefined,
 	isHTML5: false,
 	isYoutube: false,
+	isVimeo: true,
+	isLibsyn:false,
 
 	doHTML5lts: function() {
+		isHTML5 = true;
 		lts.media.removeEventListener('canplaythrough', lts.doHTML5lts);
 		lts.media.currentTime = lts.linkTo;
   		lts.media.play();
@@ -14,20 +17,25 @@ var lts = {
 	},
 
 	doYoutubelts: function() {
+		isYoutube = true;
 		lts.media.seekTo(lts.linkTo);
 		lts.media.playVideo();
 	},
 
 	doVimeolts: function() {
-		lts.media.setCurrentTime(lts.linkTo);
+		isVimeo = true;
+		lts.media.setCurrentTime(lts.linkTo).then(function() {
+			return lts.media.play();
+		});
 	},
 
 	doLibsynlts: function() {
+		isLibsyn = true;
 		lts.media.setCurrentTime(lts.linkTo);
+		lts.media.play();
 	}
 
 };
-
 
 var LinkTS = function(time) {
 	var audio 		= document.getElementsByTagName('audio'),
@@ -160,9 +168,14 @@ var LinkTS = function(time) {
 				playerframe = document.getElementById('lts-libsyn-player');
 				var lsplayer = new playerjs.Player(playerframe);
 				lts.media = lsplayer;
-				lsplayer.on('ready', lts.doLibsynlts);
+				
+				lts.media.on('ready', lts.doLibsynlts);
 				/*lsplayer.on('ready', function(){
 				  lsplayer.setCurrentTime(lts.linkTo);
+				});*/
+
+				/*lts.media.on('ended', function(){
+				  console.log('unable to play media');
 				});*/
 				return;
 			}
@@ -180,11 +193,21 @@ jQuery(document).ready( function($) {
 		timeclicked = $(this).data("time");
 		LinkTS(timeclicked);
 	});
-
 });
 
+//if link to vided at timestamp is enabled
+window.addEventListener('load', function(){
+  	if( lts.isLibsyn ){
+		return;
+	}
 
-function dothis(e){
+	const queryString = window.location.search;
+	if(queryString != ''){
+		const ltsUrlParams = new URLSearchParams(queryString);
+		if (ltsUrlParams.has('ltstime')){
+			timeclicked = ltsUrlParams.get('ltstime');
+			LinkTS(timeclicked);
+		}
 
-
-}
+	}
+});
