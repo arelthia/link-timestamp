@@ -175,11 +175,21 @@ class Link_Timestamp_Public {
 
 		$element = apply_filters( 'ps_lts_auto_link_result', $element );
 
-		$content = preg_replace(
-			"/(?:(?:(?<hh>\d{1,2})[:])?(?<mm>\d{1,2})[:])(?<ss>\d{1,2})/",
-			$element,
-			$content
-		);
+
+		//split the content into tag‍/no-tag parts
+		$parts = preg_split('/(<(?:[^"\'>]|"[^"<]*"|\'[^\'<]*\')*>)/', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
+		
+		$numParts = count($parts);
+
+		//iterate the parts while skipping every even part (i.e. the tag parts) and apply your replacement on it
+		for ($i=0; $i < $numParts; $i+=2) {
+		    $parts[$i] = preg_replace("/(?:(?:(?<hh>\d{1,2})[:])?(?<mm>\d{1,2})[:])(?<ss>\d{1,2})/",
+		    $element, 
+		    $parts[$i]);
+		}
+
+		//put everything back together
+		$content = implode('', $parts);
 
 		return $content;
 	}
