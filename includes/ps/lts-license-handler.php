@@ -8,6 +8,13 @@ if( !class_exists( 'EDD_SL_Plugin_Updater' ) ) {
 
 function lts_plugin_updater() {
 
+    // To support auto-updates, this needs to run during the wp_version_check cron job for privileged users.
+    $doing_cron = defined( 'DOING_CRON' ) && DOING_CRON;
+    if ( ! current_user_can( 'manage_options' ) && ! $doing_cron ) {
+        return;
+    }
+
+
     // retrieve our license key from the DB
     $license_key = trim( get_option( 'lts_license_key' ) );
 
@@ -23,7 +30,7 @@ function lts_plugin_updater() {
     );
 
 }
-add_action( 'admin_init', 'lts_plugin_updater', 0 );
+add_action( 'init', 'lts_plugin_updater');
 
 /**
  * Settings fields
@@ -58,8 +65,9 @@ function lts_render_license_key_field() {
             <th scope="row" valign="top">
                 <?php _e('License Key'); ?>
             </th>
-            <td>
-                <input id="lts_license_key" name="lts_license_key" type="text" class="regular-text" value="<?php esc_attr_e( $license ); ?>" />
+            <td><?php 
+            printf('<input id="lts_license_key" name="lts_license_key" type="text" class="regular-text" value="%s" />', esc_attr( $license ));
+                ?>
                 <p class="description"><?php _e('Enter your license key'); ?></p>
             </td>
         </tr>
@@ -69,7 +77,7 @@ function lts_render_license_key_field() {
                     <?php _e('Activate License'); ?>
                 </th>
                 <td>
-                    <?php if( $status !== false && $status == 'valid' ) { ?>
+                    <?php if( $status == 'valid' ) { ?>
                         <span style="color:green;"><?php _e('active'); ?></span>
                         <?php wp_nonce_field( 'lts_nonce', 'lts_nonce' ); ?>
                         <input type="submit" class="button-secondary" name="lts_license_deactivate" value="<?php _e('Deactivate License'); ?>"/>
@@ -104,7 +112,7 @@ function lts_sanitize_license( $new ) {
     if( $old && $old != $new ) {
         delete_option( 'lts_license_status' ); // 
     }
-    return $new;
+    return sanitize_text_field( $new );
 }
 
 /**
@@ -114,37 +122,52 @@ function lts_sanitize_license( $new ) {
 function lts_activate_license() {
 
     // listen for our activate button to be clicked
-    if( isset( $_POST['lts_license_activate'] ) ) {
+    if( ! isset( $_POST['lts_license_activate'] ) ) {
+        return;
+    }
 
-        // run a quick security check
-        if( ! check_admin_referer( 'lts_nonce', 'lts_nonce' ) )
-            return; // get out if we didn't click the Activate button
+    // run a quick security check
+    if( ! check_admin_referer( 'lts_nonce', 'lts_nonce' ) ){
+        return; // get out if we didn't click the Activate button
+    }
 
-        // retrieve the license from the database
-        $license = trim( get_option( 'lts_license_key' ) );
+    // retrieve the license from the database
+    $license = trim( get_option( 'lts_license_key' ) );
 
+    if ( ! $license ) {
+        $license = filter_input( INPUT_POST, 'lts_license_key', FILTER_SANITIZE_STRING );
+    }
+    if ( ! $license ) {
+        return;
+    }
 
-        // data to send in our API request
-        $api_params = array(
-            'edd_action'=> 'activate_license',
-            'license' 	=> $license,
-            'item_name' => urlencode( LINK_TIMESTAMP_EDD_NAME ), // the name of our product in EDD
-            'url'       => home_url()
-        );
+    // data to send in our API request
+    $api_params = array(
+        'edd_action'=> 'activate_license',
+        'license' 	=> $license,
+        'item_id'     => LINK_TIMESTAMP_EDD_ID,
+        'item_name' => urlencode( LINK_TIMESTAMP_EDD_NAME ), // the name of our product in EDD
+        'url'       => home_url(),
+        'environment' => function_exists( 'wp_get_environment_type' ) ? wp_get_environment_type() : 'production',
+    );
 
-        // Call the custom API.
-        $response = wp_remote_post( LINK_TIMESTAMP_EDD_STORE_URL, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
+    // Call the custom API.
+    $response = wp_remote_post( LINK_TIMESTAMP_EDD_STORE_URL, array( 
+        'timeout' => 15, 
+        'sslverify' => false, 
+        'body' => $api_params,
+    ) );
 
-        // make sure the response came back okay
-        if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+    // make sure the response came back okay
+    if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
 
-            if ( is_wp_error( $response ) ) {
-                $message = $response->get_error_message();
-            } else {
-                $message = __( 'An error occurred, please try again.' );
-            }
-
+        if ( is_wp_error( $response ) ) {
+            $message = $response->get_error_message();
         } else {
+            $message = __( 'An error occurred, please try again.' );
+        }
+
+    } else {
 
 
         // decode the license data
@@ -162,6 +185,7 @@ function lts_activate_license() {
                         );
                         break;
 
+                    case 'disabled':    
                     case 'revoked' :
 
                         $message = __( 'Your license key has been disabled.' );
@@ -199,20 +223,22 @@ function lts_activate_license() {
             // Check if anything passed on a message constituting a failure
         if ( ! empty( $message ) ) {
             $base_url = admin_url( LINK_TIMESTAMP_LICENSE_PAGE );
-            $redirect = add_query_arg( array( 'sl_activation' => 'false', 'message' => urlencode( $message ) ), $base_url );
+            $redirect = add_query_arg( array( 'sl_activation' => 'false', 'message' => rawurlencode( $message ) ), $base_url );
 
-            wp_redirect( $redirect );
+            wp_safe_redirect( $redirect );
             exit();
         }
 
 
 
         // $license_data->license will be either "valid" or "invalid"
-
+        if ( 'valid' === $license_data->license ) {
+            update_option( 'lts_license_key', $license );
+        }
         update_option( 'lts_license_status', $license_data->license );
         wp_redirect( admin_url( LINK_TIMESTAMP_LICENSE_PAGE ) );
         exit();
-    }
+    
 }
 add_action('admin_init', 'lts_activate_license');
 /**
@@ -225,8 +251,9 @@ function lts_deactivate_license() {
     if( isset( $_POST['lts_license_deactivate'] ) ) {
 
         // run a quick security check
-        if( ! check_admin_referer( 'lts_nonce', 'lts_nonce' ) )
+        if( ! check_admin_referer( 'lts_nonce', 'lts_nonce' ) ){
             return; // get out if we didn't click the Activate button
+        }
 
         // retrieve the license from the database
         $license = trim( get_option( 'lts_license_key' ) );
@@ -236,12 +263,20 @@ function lts_deactivate_license() {
         $api_params = array(
             'edd_action'=> 'deactivate_license',
             'license' 	=> $license,
-            'item_name' => urlencode( LINK_TIMESTAMP_EDD_NAME ), // the name of our product in EDD
-            'url'       => home_url()
+            'item_id' => LINK_TIMESTAMP_EDD_ID,
+            'item_name' => rawurlencode( LINK_TIMESTAMP_EDD_NAME ), // the name of our product in EDD
+            'url'       => home_url(),
+            'environment' => function_exists( 'wp_get_environment_type' ) ? wp_get_environment_type() : 'production',
         );
 
         // Call the custom API.
-        $response = wp_remote_post( LINK_TIMESTAMP_EDD_STORE_URL, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
+        $response = wp_remote_post( LINK_TIMESTAMP_EDD_STORE_URL, 
+            array( 
+                'timeout' => 15, 
+                'sslverify' => false, 
+                'body' => $api_params 
+            ) 
+        );
 
         // make sure the response came back okay
         if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
@@ -253,9 +288,9 @@ function lts_deactivate_license() {
             }
 
             $base_url = admin_url( LINK_TIMESTAMP_LICENSE_PAGE );
-            $redirect = add_query_arg( array( 'sl_activation' => 'false', 'message' => urlencode( $message ) ), $base_url );
+            $redirect = add_query_arg( array( 'sl_activation' => 'false', 'message' => rawurlencode( $message ) ), $base_url );
 
-            wp_redirect( $redirect );
+            wp_safe_redirect( $redirect );
             exit();
         }
 
@@ -267,7 +302,7 @@ function lts_deactivate_license() {
             delete_option( 'lts_license_status' );
         }
 
-        wp_redirect( admin_url( LINK_TIMESTAMP_LICENSE_PAGE ) );
+        wp_safe_redirect( admin_url( LINK_TIMESTAMP_LICENSE_PAGE ) );
         exit();
     }    
 }
@@ -281,30 +316,42 @@ add_action('admin_init', 'lts_deactivate_license');
  *************************************/
 function lts_check_license() {
 
-    global $wp_version;
+    //global $wp_version;
 
     $license = trim( get_option( 'lts_license_key' ) );
 
     $api_params = array(
         'edd_action' => 'check_license',
         'license' => $license,
-        'item_name' => urlencode( LINK_TIMESTAMP_EDD_NAME ),
-        'url'       => home_url()
+        'item_id' => LINK_TIMESTAMP_EDD_ID,
+        'item_name' => rawurlencode( LINK_TIMESTAMP_EDD_NAME ),
+        'url'       => home_url(),
+        'environment' => function_exists( 'wp_get_environment_type' ) ? wp_get_environment_type() : 'production',
     );
 
     // Call the custom API.
-    $response = wp_remote_post( LINK_TIMESTAMP_EDD_STORE_URL, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
+    $response = wp_remote_post( 
+        LINK_TIMESTAMP_EDD_STORE_URL, 
+        array( 
+            'timeout' => 15, 
+            'sslverify' => false, 
+            'body' => $api_params 
+        ) 
+    );
 
-    if ( is_wp_error( $response ) )
+    if ( is_wp_error( $response ) ){
         return false;
+    }
 
     $license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
     if( $license_data->license == 'valid' ) {
-        echo 'valid'; exit;
+        echo 'valid'; 
+        exit;
         // this license is still valid
     } else {
-        echo 'invalid'; exit;
+        echo 'invalid'; 
+        exit;
         // this license is no longer valid
     }
 }
@@ -323,7 +370,7 @@ function lts_admin_notices() {
                 $message = urldecode( $_GET['message'] );
                 ?>
                 <div class="error">
-                    <p><?php echo $message; ?></p>
+                    <p><?php echo wp_kses_post( $message ); ?></p>
                 </div>
                 <?php
                 break;
