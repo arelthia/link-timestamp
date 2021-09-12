@@ -123,7 +123,9 @@ function lts_activate_license() {
 
     // listen for our activate button to be clicked
     if( ! isset( $_POST['lts_license_activate'] ) ) {
+        
         return;
+
     }
 
     // run a quick security check
@@ -160,7 +162,7 @@ function lts_activate_license() {
 
     // make sure the response came back okay
     if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
-
+ 
         if ( is_wp_error( $response ) ) {
             $message = $response->get_error_message();
         } else {
@@ -168,7 +170,6 @@ function lts_activate_license() {
         }
 
     } else {
-
 
         // decode the license data
         $license_data = json_decode( wp_remote_retrieve_body( $response ) );
