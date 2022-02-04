@@ -11,7 +11,7 @@
  * Plugin Name:       Link Timestamp
  * Plugin URI:        https://pintopsolutions.com
  * Description:       Add a link to timestamps on your website. When the link is clicked the audio or video will jump to the correct time in the media player.
- * Version:           2.3.1
+ * Version:           2.3.3
  * Author:            Arelthia Phillips
  * Author URI:        https://pintopsolutions.com
  * License:           GPL-2.0+
@@ -27,7 +27,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 define('LINK_TIMESTAMP_PLUGIN_FILE', __FILE__ );
 define('LINK_TIMESTAMP_NAME', 'link-timestamp');
-define('LINK_TIMESTAMP_VERSION', '2.3.1');
+define('LINK_TIMESTAMP_VERSION', '2.3.3');
 define('LINK_TIMESTAMP_BETA', false);
 define('LINK_TIMESTAMP_LICENSE_PAGE', 'options-general.php?page=linktimestamp');
 define('LINK_TIMESTAMP_DIR', dirname( __FILE__ ));

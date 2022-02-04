@@ -28,6 +28,7 @@ var lts = {
 		lts.media.setCurrentTime(lts.linkTo).then(function() {
 			return lts.media.play();
 		});
+
 	},
 
 	doLibsynlts: function() {
@@ -102,7 +103,7 @@ var LinkTS = function(time) {
 				lts.doSkip = lts.doVimeolts;
 				iframe[i].id = 'lts-vimeo-player';
 				lts.media = new Vimeo.Player('lts-vimeo-player');
-				lts.media.on('play', lts.doVimeolts );
+				lts.doSkip();
 				lts.media.play();
 				return;
 			}

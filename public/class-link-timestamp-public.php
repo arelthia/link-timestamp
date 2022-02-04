@@ -56,7 +56,6 @@ class Link_Timestamp_Public {
 
         $options = get_option('ps_lts_settings');
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/link-timestamp-public.js', array( 'jquery' ), $this->version, false );
-		
 		if (isset($options['link_vimeo']) && true == $options['link_vimeo']){
 			wp_enqueue_script('ps-lts-vimeo', plugin_dir_url( __FILE__ ) .'js/vimeoplayer.js'); //https://player.vimeo.com/api/player.js
 		}

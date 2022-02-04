@@ -174,6 +174,7 @@ class Link_Timestamp {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_filter( 'embed_oembed_html', $plugin_public, 'enable_youtube_js_api');
 		$this->loader->add_filter( 'the_content', $plugin_public, 'do_autolink' );
+		//$this->loader->add_filter( 'render_block', $plugin_public, 'do_autolink', 10, 2 );
 	}
 
 	/**

@@ -2,8 +2,8 @@
 Contributors: apintop
 Tags: audio, embed, html5, media, plugin, shortcode, video, vimeo, youtube
 Requires at least: 4.9
-Tested up to: 5.8
-Stable tag: 2.3.1
+Tested up to: 5.9
+Stable tag: 2.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,8 +82,14 @@ You can use the shortcode and have automatically link timestamps enabled. Howeve
 4. Link Timestamp disable automatic link on post checkbox
 
 == Changelog ==
+= 2.3.3 =
+Fixed vimeo player doskip
+Update License class name
 
-= 2.3 =
+= 2.3.2 =
+Fixed license activate and deactivate for plugin update issue.
+
+= 2.3.1 =
 Fixed do_autolink to only link timestamps in the text content, not timestamps in html tag attributes 
 
 = 2.3 =
