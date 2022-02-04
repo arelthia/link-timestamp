@@ -1,8 +1,8 @@
 <?php
 
-if( !class_exists( 'EDD_SL_Plugin_Updater' ) ) {
+if( !class_exists( 'Pintop_Plugin_Updater' ) ) {
     // load our custom updater
-    include( dirname( __FILE__ ) .  '/EDD_SL_Plugin_Updater.php');
+    include( dirname( __FILE__ ) .  '/Pintop_Plugin_Updater.php');
 }
 
 
@@ -19,7 +19,7 @@ function lts_plugin_updater() {
     $license_key = trim( get_option( 'lts_license_key' ) );
 
     // setup the updater
-    $edd_updater = new EDD_SL_Plugin_Updater( LINK_TIMESTAMP_EDD_STORE_URL, LINK_TIMESTAMP_PLUGIN_FILE, array(
+    $edd_updater = new Pintop_Plugin_Updater( LINK_TIMESTAMP_EDD_STORE_URL, LINK_TIMESTAMP_PLUGIN_FILE, array(
             'version' 	=> LINK_TIMESTAMP_VERSION, 				// current version number
             'license' 	=> $license_key, 		// license key (used get_option above to retrieve from DB)
             'item_name' => LINK_TIMESTAMP_EDD_NAME, 	// name of this plugin
@@ -59,37 +59,31 @@ function lts_render_license_key_field() {
     $license 	= get_option( 'lts_license_key' );
     $status 	= get_option( 'lts_license_status' );
     ?>
-   <!-- <table class="form-table" style="background-color: #F0C88B;">-->
-        <tbody>
         <tr valign="top">
             <th scope="row" valign="top">
-                <?php _e('License Key'); ?>
+                License Key
             </th>
-            <td><?php 
-            printf('<input id="lts_license_key" name="lts_license_key" type="text" class="regular-text" value="%s" />', esc_attr( $license ));
-                ?>
-                <p class="description"><?php _e('Enter your license key'); ?></p>
+            <td>
+    <?php
+    printf(
+        '<input type="text" class="regular-text" id="lts_license_key" name="lts_license_key" value="%s" />',
+        esc_attr( $license )
+    );
+    $button = array(
+        'name'  => 'lts_license_deactivate',
+        'label' => __( 'Deactivate License' ),
+    );
+    if ( 'valid' !== $status ) {
+        $button = array(
+            'name'  => 'lts_license_activate',
+            'label' => __( 'Activate License' ),
+        );
+    }
+    wp_nonce_field( 'lts_nonce', 'lts_nonce' );
+    ?>
+    <input type="submit" class="button-secondary" name="<?php echo esc_attr( $button['name'] ); ?>" value="<?php echo esc_attr( $button['label'] ); ?>"/>
             </td>
-        </tr>
-        <?php if( false !== $license ) { ?>
-            <tr valign="top">
-                <th scope="row" valign="top">
-                    <?php _e('Activate License'); ?>
-                </th>
-                <td>
-                    <?php if( $status == 'valid' ) { ?>
-                        <span style="color:green;"><?php _e('active'); ?></span>
-                        <?php wp_nonce_field( 'lts_nonce', 'lts_nonce' ); ?>
-                        <input type="submit" class="button-secondary" name="lts_license_deactivate" value="<?php _e('Deactivate License'); ?>"/>
-                    <?php } else {
-                        wp_nonce_field( 'lts_nonce', 'lts_nonce' ); ?>
-                        <input type="submit" class="button-secondary" name="lts_license_activate" value="<?php _e('Activate License'); ?>"/>
-                    <?php } ?>
-                </td>
-            </tr>
-        <?php } ?>
-        </tbody>
-  <!--  </table>-->
+    </tr>
 
     <?php
 
@@ -123,9 +117,7 @@ function lts_activate_license() {
 
     // listen for our activate button to be clicked
     if( ! isset( $_POST['lts_license_activate'] ) ) {
-        
         return;
-
     }
 
     // run a quick security check
@@ -148,7 +140,7 @@ function lts_activate_license() {
         'edd_action'=> 'activate_license',
         'license' 	=> $license,
         'item_id'     => LINK_TIMESTAMP_EDD_ID,
-        'item_name' => urlencode( LINK_TIMESTAMP_EDD_NAME ), // the name of our product in EDD
+        'item_name' => rawurlencode( LINK_TIMESTAMP_EDD_NAME ), // the name of our product in EDD
         'url'       => home_url(),
         'environment' => function_exists( 'wp_get_environment_type' ) ? wp_get_environment_type() : 'production',
     );
@@ -178,50 +170,43 @@ function lts_activate_license() {
 
                 switch( $license_data->error ) {
 
-                    case 'expired' :
-
+                    case 'expired':
                         $message = sprintf(
-                            __( 'Your license key expired on %s.' ),
+                            __( 'Your license key expired on %s.', 'link-timestamp' ),
                             date_i18n( get_option( 'date_format' ), strtotime( $license_data->expires, current_time( 'timestamp' ) ) )
                         );
                         break;
 
                     case 'disabled':    
                     case 'revoked' :
-
-                        $message = __( 'Your license key has been disabled.' );
+                        $message = __( 'Your license key has been disabled.', 'link-timestamp' );
                         break;
 
                     case 'missing' :
-
-                        $message = __( 'Invalid license.' );
+                        $message = __( 'Invalid license.', 'link-timestamp' );
                         break;
 
                     case 'invalid' :
                     case 'site_inactive' :
-
-                        $message = __( 'Your license is not active for this URL.' );
+                        $message = __( 'Your license is not active for this URL.', 'link-timestamp' );
                         break;
 
                     case 'item_name_mismatch' :
-
-                        $message = sprintf( __( 'This appears to be an invalid license key for %s.' ), LINK_TIMESTAMP_EDD_NAME );
+                        $message = sprintf( __( 'This appears to be an invalid license key for %s.', 'link-timestamp' ), LINK_TIMESTAMP_EDD_NAME );
                         break;
 
                     case 'no_activations_left':
-
-                        $message = __( 'Your license key has reached its activation limit.' );
+                        $message = __( 'Your license key has reached its activation limit.', 'link-timestamp' );
                         break;
 
                     default :
-
-                        $message = __( 'An error occurred, please try again.' );
+                        $message = __( 'An error occurred, please try again.', 'link-timestamp' );
                         break;
                 }
             }        
         }
 
-            // Check if anything passed on a message constituting a failure
+        // Check if anything passed on a message constituting a failure
         if ( ! empty( $message ) ) {
             $base_url = admin_url( LINK_TIMESTAMP_LICENSE_PAGE );
             $redirect = add_query_arg( array( 'sl_activation' => 'false', 'message' => rawurlencode( $message ) ), $base_url );
@@ -299,7 +284,7 @@ function lts_deactivate_license() {
         $license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
         // $license_data->license will be either "deactivated" or "failed"
-        if( $license_data->license == 'deactivated' ){
+        if( $license_data->license === 'deactivated' ){
             delete_option( 'lts_license_status' );
         }
 
@@ -346,7 +331,7 @@ function lts_check_license() {
 
     $license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
-    if( $license_data->license == 'valid' ) {
+    if( $license_data->license === 'valid' ) {
         echo 'valid'; 
         exit;
         // this license is still valid

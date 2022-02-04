@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @author Easy Digital Downloads
  * @version 1.9.0
  */
-class EDD_SL_Plugin_Updater {
+class Pintop_Plugin_Updater {
 
 	private $api_url              = '';
 	private $api_data             = array();
