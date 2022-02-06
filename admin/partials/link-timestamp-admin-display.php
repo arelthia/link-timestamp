@@ -48,6 +48,7 @@
                                 <li>&#8226; <?php _e( 'SoundCloud Embedded Player', 'link-timestamp' ); ?></li>
                                 <li>&#8226; <?php _e( 'Libsyn Embedded Player', 'link-timestamp' ); ?></li>
                                 <li>&#8226; <?php _e( 'Spreaker Embedded Player with JS API', 'link-timestamp' ); ?></li>
+                                <li>&#8226; <?php _e( 'Seriously Simple Podcasting Player', 'link-timestamp' ); ?></li>
                                 <li>&#8226;	<?php _e( 'HTML5 &lt;audio&gt; elements', 'link-timestamp' ); ?></li>
                                 <li>&#8226;	<?php _e( 'HTML5 &lt;video&gt; elements', 'link-timestamp' ); ?></li>
                             </ul>
