@@ -4,7 +4,7 @@
  * Fired when the plugin is uninstalled.
  *
  *
- * @link       https://pintopsolutions.com
+ * @link       https://arelthiaphillips.com
  * @since      1.0
  *
  * @package    Link_Timestamp

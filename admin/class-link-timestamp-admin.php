@@ -7,7 +7,7 @@
  *
  * @package    Link_Timestamp
  * @subpackage Link_Timestamp/admin
- * @author     Arelthia Phillips <arelthia@pintopsolutions.com>
+ * @author     Arelthia Phillips <ap.gwhere@gmail.com>
  */
 class Link_Timestamp_Admin {
 
@@ -278,7 +278,6 @@ class Link_Timestamp_Admin {
 			'link_libsyn' 			=> isset($input['link_libsyn']) && true == $input['link_libsyn'] ? true : false,
 			'link_spreaker' 		=> isset($input['link_spreaker']) && true == $input['link_spreaker'] ? true : false,
 			'auto_link' 			=> isset($input['auto_link']) && true == $input['auto_link'] ? true : false
-			/*'pt_lts_clean_on_delete' => isset($input['pt_lts_clean_on_delete']) && true == $input['pt_lts_clean_on_delete'] ? true : false*/
 		);
 
 		return $valid;

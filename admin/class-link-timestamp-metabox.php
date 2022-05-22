@@ -4,7 +4,7 @@
  * Add Metabox to the WordPress Admin for enabled post types
  *
  *
- * @link       https://pintopsolutions.com
+ * @link       https://arelthiaphillips.com
  * @since      1.0
  *
  * @package    Link_Timestamp

@@ -5,7 +5,7 @@
  *
  * @package    Link_Timestamp
  * @subpackage Link_Timestamp/public
- * @author     Arelthia Phillips <arelthia@pintopsolutions.com>
+ * @author     Arelthia Phillips <ap.gwhere@gmail.com>
  */
 class Link_Timestamp_Public {
 

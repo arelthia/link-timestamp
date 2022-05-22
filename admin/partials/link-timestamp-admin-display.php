@@ -4,7 +4,7 @@
  * Admin settings page
  *
  *
- * @link       https://pintopsolutions.com
+ * @link       https://arelthiaphillips.com
  * @since      1.0
  *
  * @package    Link_Timestamp
@@ -62,9 +62,7 @@
                                 <li>&#8226;Add <code>?ltstime=time</code> to the end of the link.</li>
                                 <li>&#8226;Turn off auto linking on the page where you add the link to the timestamp.</li>
                             </ul> 
-                            <h3><?php $url2 = 'https://https://pintopsolutions.com/contact/';
-                                $link2     = sprintf( __( 'Need help? Or have an idea how this plugin can be made better. Reach out <a href=%s>on our website?</a>', 'link-timestamp' ), esc_url( $url2 ) );
-                                echo $link2; ?></h3>
+                            
                         </div>
                     </div>
                     <div class="postbox">

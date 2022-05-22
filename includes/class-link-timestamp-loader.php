@@ -8,7 +8,7 @@
  *
  * @package    Link_Timestamp
  * @subpackage Link_Timestamp/includes
- * @author     Arelthia Phillips <arelthia@pintopsolutions.com>
+ * @author     Arelthia Phillips <ap.gwhere@gmail.com>
  */
 class Link_Timestamp_Loader {
 
