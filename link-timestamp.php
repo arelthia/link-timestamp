@@ -25,11 +25,8 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define('LINK_TIMESTAMP_PLUGIN_FILE', __FILE__ );
 define('LINK_TIMESTAMP_NAME', 'link-timestamp');
 define('LINK_TIMESTAMP_VERSION', '2.3.4');
-define('LINK_TIMESTAMP_LICENSE_PAGE', 'options-general.php?page=linktimestamp');
-define('LINK_TIMESTAMP_DIR', dirname( __FILE__ ));
 
 
 function activate_link_timestamp() {
