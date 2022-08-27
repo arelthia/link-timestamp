@@ -1,4 +1,4 @@
-=== Link Timestamp ===
+# Link Timestamp 
 Contributors: apintop
 Tags: audio, embed, html5, media, plugin, shortcode, video, vimeo, youtube
 Requires at least: 4.9
@@ -9,29 +9,39 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Add a link to timestamps on your website. When the link is clicked the audio or video will jump to the correct time in the media player.
 
-== Description ==
+## Description
 
-Automatically link timestamps
+### Automatically link timestamps
 * Link Timestamp can be configured to automatically link timestamps.
 * Control which post type gets automatically linked from the settings page. (Settings > Link Timestamp)
 * Control if timestamps are linked to audio or video. (Settings > Link Timestamp) This comes in handy if you have audio and video on the same page.
 * Turn off auto linking on individual pages from the post editor.
 
-
-Manually link timestamps
+### Manually link timestamps
 * You can manually add links to your timestamps using the Link Timestamp button in the visual editor
 
-Link Timestamp will work with the following:
+### Link Timestamp will work with the following:
 *   Vimeo videos
 *   Youtube videos
 * 	Smart Podcast Track Player
 *   Soundcloud Embeded Player
 *   Blubrry PowerPress Players
+*	Libsyn Embedded Player
+* 	Spreaker Embedded Player with JS API
+*	Seriously Simple Podcasting Player
 *   HTML5 <audio> elements
 *   HTML5 <video> elements
 
+### Control Autolinking
+*	Auto link on single posts that are a specific post type
+*	Auto link on single posts that belong to a specific category
 
-== Installation ==
+### Link to a timestamp from a different page
+*	Add `?ltstime=time` to the end of the link.
+
+ 
+
+## Installation
 
 = Uploading in WordPress Dashboard =
 
@@ -82,6 +92,10 @@ You can use the shortcode and have automatically link timestamps enabled. Howeve
 4. Link Timestamp disable automatic link on post checkbox
 
 == Changelog ==
+= 2.3.4 =
+Removed constants for product store
+Add additional features
+
 = 2.3.3 =
 Fixed vimeo player doskip
 Update License class name
