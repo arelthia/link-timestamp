@@ -1,9 +1,9 @@
 - name: Home
   link: ./
 - name: Getting Started
-  link: ./getting-started.md
+  link: ./getting-started
 - name: Installation
-  link: ./installation.md
+  link: ./installation
 - name: Faqs
-  link: ./faqs.md
+  link: ./faqs
   
