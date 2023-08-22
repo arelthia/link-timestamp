@@ -36,9 +36,7 @@ Add a link to timestamps on your website. When the link is clicked the audio or 
 *	Add `?ltstime=time` to the end of the link.
 
  
-
-
-== Media ==
+### Media
 
 | Syntax      | Description | Test Text     |
 |    :----:   |    :----:   |     :----:    |
@@ -47,13 +45,13 @@ Add a link to timestamps on your website. When the link is clicked the audio or 
 
 
 
-<p style="display:flex;justify-content:space-between;">
+<p style="float:left">
 <a href="https://www.youtube.com/watch?v=xPK_YNReXSE&t=1s" width="33%"><img src="images/thumbnail1.png" alt="linktimestamps"/><a>
 <a href="https://drive.google.com/file/d/1OrypqTFBd8JQQ3Hf2B6H3GbX9sbNozmc/view" width="33%" ><img src="images/thumbnail2.png" alt="linktimestamps"/></a>
 <video src="images/MakeTimeStampsMoreUseful.mp4" controls title="Title" width="33%"></video>
 </p>
 
 
-
+### From Google
 
 <video src="https://drive.google.com/file/d/1OrypqTFBd8JQQ3Hf2B6H3GbX9sbNozmc/view" controls title="Title" width="33%" poster="images/thumbnail1.png"></video>
