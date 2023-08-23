@@ -23,22 +23,18 @@
       </header>
 
       <div id="banner">
-        <span id="logo"></span>
-      
+        <div class="banner-inner">
           <div class="downloads">
-            
-            <ul>
-                {% for item in site.data.navigation %}
-                <li><a href="{{ item.link }}" {% if page.url == item.link %}style="color: red;"{% endif %}>
-                    {{ item.name }}
-                  </a></li>
-                {% endfor %}
-            </ul>
-          
-                
-              
-          </div>
-      
+          <ul>
+            {% for item in site.data.navigation %}
+            <li><a href="{{ item.link }}" {% if page.url == item.link %}style="color: red;"{% endif %} class="button">
+                {{ item.name }}
+              </a></li>
+            {% endfor %}
+        </ul>
+
+        </div><!-- end downloads -->
+      </div><!-- end banner-inner -->
       </div><!-- end banner -->
 
     <div class="wrapper">
