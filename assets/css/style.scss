@@ -484,7 +484,7 @@
    font-weight: 300;
    margin: 0px;
    padding: 20px 0px 20px 0px;
-   background: url(../images/body-background.png) #eae6d1;
+   background: #f5f5f5;
  }
  
  h1, h2, h3, h4, h5, h6 {
@@ -603,21 +603,21 @@
    padding: 5px 10px;
    color: #444;
    background-color: #eee;
-   border-bottom: 2px solid #ffcc00;
-   border-right: 1px solid #ffcc00;
+   border-bottom: none;
+   border-right: none;
  }
  th:first-child {
-   border-left: 1px solid #ffcc00;
+   border-left: none;
  }
  
  td {
    text-align: left;
    padding: 5px 10px;
-   border-bottom: 1px solid #e5e5e5;
-   border-right: 1px solid #ffcc00;
+   border-bottom: none;
+   border-right: none;
  }
  td:first-child {
-   border-left: 1px solid #ffcc00;
+   border-left: none;
  }
  
  tr:nth-child(even) > td {
