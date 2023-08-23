@@ -1,7 +1,7 @@
----
----
+// ---
+// ---
 
-@import "{{ site.theme }}";
+// @import "{{ site.theme }}";
 
 /* normalize.css 2012-02-07T12:37 UTC - https://github.com/necolas/normalize.css */
 /* =============================================================================
@@ -856,13 +856,12 @@
  }
  
  footer {
-   width: 180px;
-   position: fixed;
-   left: 50%;
-   margin-left: -530px;
-   bottom: 20px;
-   text-align: right;
-   line-height: 16px;
+    text-align: center;
+    margin: 20px auto;
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: auto;
  }
  
  @media print, screen and (max-width: 1060px) {
