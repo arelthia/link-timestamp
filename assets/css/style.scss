@@ -755,11 +755,11 @@
    background-color: #FFE788;
  }
  #banner .downloads {
-   /*float: right;*/
-   /*margin: 0 45px 0 0;*/
+   float: none;
+   margin: 0;
    position: absolute;
    right: 50%;
-   margin-right: -455px;
+   margin-right: 0;
  }
  #banner .downloads span {
    float: left;
