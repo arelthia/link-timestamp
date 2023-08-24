@@ -1,0 +1,9 @@
+- name: Home
+  link: ./
+- name: Getting Started
+  link: ./getting-started
+- name: Installation
+  link: ./installation
+- name: Faqs
+  link: ./faqs
+  
