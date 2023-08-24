@@ -33,11 +33,12 @@ Add a link to timestamps on your website. When the link is clicked the audio or 
 
 ### Link to a timestamp from a different page
 
-![query string](images/link-timestamp_1.jpg){: style="float: left"}
+![query string](images/link-timestamp_1.jpg){: style="float: left; margin:5px"}
 
 Add `?ltstime=time` to the end of the link. THis is place holder text here. Auto link on single posts that are a specific post type Auto link on single posts that are a specific post typeAuto link on single posts that are a specific post type
 
  
+
 ### Media
 
 | Syntax      | Description | Test Text     |
