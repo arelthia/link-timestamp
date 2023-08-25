@@ -1055,41 +1055,4 @@
  }
 
 
- /***
-  *  CSS to convert ul with a class of cards-list to a card layout that wraps
-  *  nicely responsively.
-  *  remove bullets from lists
-  */
-  ul.cards-list {
-    list-style-type: none;
-    list-style-image: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-
-  }
-
-  ul.cards-list li:first-child {
-    margin-bottom: 1rem;
-    width: 50%;
-    border: 1px solid #e5e5e5;
-    border-radius: 4px;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
-    text-align: left;
-    transition: box-shadow .3s ease-in-out;
-    display: flex;
-    height: 100%;
-
-  }
-
-  // ul.cards-list li ul li {
-  //   margin-bottom: 0;
-  //   width: 30%;
-  //   border: none;
-  //   border-radius: 0;
-  //   box-shadow: none;
-  //   padding: 0;
-  // }
-
+ 
