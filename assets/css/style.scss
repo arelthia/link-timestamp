@@ -1053,3 +1053,37 @@
     border-radius: 0.3rem;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
  }
+
+
+ /***
+  *  CSS to convert ul with a class of cards-list to a card layout that wraps
+  *  nicely responsively.
+  *  
+  */
+  ul.cards-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  ul.cards-list li {
+    margin-bottom: 1rem;
+    width: 30%;
+    border: 1px solid #e5e5e5;
+    border-radius: 0.3rem;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
+    text-align: left;
+    padding: 1rem;
+  }
+
+  ul.cards-list li ul li {
+    margin-bottom: 0;
+    width: 30%;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
