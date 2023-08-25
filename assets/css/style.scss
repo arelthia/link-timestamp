@@ -1031,24 +1031,8 @@ details {
   margin-bottom: 1em;
 }
 
-details summary {
-  cursor: pointer;
-  display: list-item;
-}
 
-details summary::-webkit-details-marker {
-  display: none;
-}
 
-details summary:before {
-  content: '▶';
-  padding-right: 0.3em;
-
-}
-
-details[open] summary:before {
-  content: '▼';
-}
 
 
 
