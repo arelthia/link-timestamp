@@ -1055,11 +1055,10 @@
  }
 
 
- .faq-card {
+ .card {
   background: #fff;
   border: 0;
   border-radius: 4px;
-  border-top: 8px solid #255f82;
   box-sizing: border-box;
   color: #141414;
   display: flex;
@@ -1072,4 +1071,26 @@
   text-align: left;
   text-decoration: none;
   box-shadow: 0 1px 4px #0003;
+  font-size: 14px;
+    line-height: 1.5;
+    font-weight: 400;
+    padding: 24px;
+
+}
+
+
+.faq-card{
+  border-top: 8px solid #235796;
+}
+
+.video-card {
+  border-top: 8px solid #4bc7e7;
+}
+
+.doc-card {
+  border-top: 8px solid #f9c606;
+}
+
+.article-card {
+  border-top: 8px solid #255f82;
 }

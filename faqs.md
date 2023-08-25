@@ -1,50 +1,72 @@
 # Frequently Asked Questions
 
-Will it work with the Soundcloud Embeded Player?
-<br>
-Yes
-{: .faq-card}
+<details><summary> Will it work with the Soundcloud Embeded Player?</summary>
+<p>
 
-Will it work with the Blubrry PowerPress Player?
-<br>
 Yes
-{: .faq-card}
+</p></details>
 
-Will it work with the Smart Podcast Player?
-<br>
+<details><summary> Will it work with the Blubrry PowerPress Player?</summary>
+<p>
+
+Yes
+</p></details>
+
+<details><summary> Will it work with the Smart Podcast Player?</summary>
+<p>
+
 Yes, It will work with the Smart Podcast Track Player.
-{: .faq-card}
+</p></details>
 
-Will it work with an embeded Vimeo video?
-<br>
+<details><summary> Will it work with an embeded Vimeo video?</summary>
+<p>
+
 Yes
-{: .faq-card}
+</p></details>
 
-Will it work with an embeded Youtube video?
-<br>
+<details><summary> Will it work with an embeded Youtube video?</summary>
+<p>
+
 Yes it works with a Youtube embeded video using just the url or using [embed].  It will not work with the old Youtube embed that uses the <iframe> code.
-{: .faq-card}
+</p></details>
 
-Can I use the shortcodes and automatically linked timestamps? 
-<br>
+<details><summary> Can I use the shortcodes and automatically linked timestamps? </summary>
+<p>
+
 You can use the shortcode and have automatically link timestamps enabled. However, they will not both work on the same content. If you have the shortcode on a post/page links will not be linked automatically for that post/page.
-{: .faq-card}
+</p></details>
 
 
 
 
 ## Example List To Cards
 
-Presto Player
+**Presto Player**
+<br>
 Best Video Player Plugin for WordPress
-Videopack
+{: .card .video-card}
+
+**Videopack**
+<br>
 Responsive WordPress Video Player Plugin
-YouTube Embed
+{: .card .video-card}
+
+**YouTube Embed**
+<br>
 Simple to Use WordPress Video Player Plugin
-Easy Video Player
+{: .card .video-card}
+
+**Easy Video Player**
+<br>
 User-friendly WordPress video Plugin to showcase your videos. 
-All-in-One Video Gallery
+{: .card .doc-card}
+
+**All-in-One Video Gallery**
+<br>
 Video Gallery and Player Plugin
-WP Video Lightbox
+{: .card .article-card}
+
+**WP Video Lightbox**
+<br>
 Lightweight player that doesn’t affect website performance.
-{: .cards-list}
+{: .card .video-card}
