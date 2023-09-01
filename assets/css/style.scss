@@ -1077,3 +1077,18 @@ margin: 10px;
 .article-card {
   border-top: 8px solid #255f82;
 }
+
+
+.thumbnail:before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  // add svg play circle icon filled to content
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath fill='%23fff' d='M16 10v28l22-14z'/%3E%3C/svg%3E");
+  font-size: 100px;
+  color: #fff;
+  opacity: 0.8;
+  text-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+}
