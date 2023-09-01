@@ -43,6 +43,6 @@ Add `?ltstime=time` to the end of the link. THis is place holder text here. Auto
 
 | Syntax      | Description | Test Text     |
 |    :----:   |    :----:   |     :----:    |
-| <a href="https://www.youtube.com/watch?v=xPK_YNReXSE&t=1s" class="thumbnail" target="_blank"><img src="images/thumbnail1.png" alt="linktimestamps"/><a>    | <a href="https://drive.google.com/file/d/1OrypqTFBd8JQQ3Hf2B6H3GbX9sbNozmc/view" class="thumbnail" target="_blank"><img src="images/thumbnail2.png" alt="linktimestamps"/></a>       |  ![video](images/thumbnail3.png){: .thumbnail target="_blank"  }  |
+| <a href="https://www.youtube.com/watch?v=xPK_YNReXSE&t=1s"  target="_blank"><img src="images/thumbnail1.png" alt="linktimestamps" class="thumbnail" /><a>    | <a href="https://drive.google.com/file/d/1OrypqTFBd8JQQ3Hf2B6H3GbX9sbNozmc/view"  target="_blank"><img src="images/thumbnail2.png" alt="linktimestamps" class="thumbnail" /></a>       |  ![video](images/thumbnail3.png){: .thumbnail target="_blank"  }  |
 
 
